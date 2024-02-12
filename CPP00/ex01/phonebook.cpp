@@ -1,51 +1,33 @@
 #include "phonebook.hpp"
 
-void    Book::setFirstName(std::string str)
-{
-        _firstname = str;
-}
+PhoneBook::PhoneBook():maxContact(8),newContactIndex(0) ,numOfContact(0)
+{}
 
-void    Book::setLastName(std::string str)
-{
-        _lasttname = str;
-}
+PhoneBook::~PhoneBook()
+{}
 
-void    Book::setPhoneNumber(std::string str)
+void    PhoneBook::add()
 {
-        _phonenumber = str;
-}
+    std::string firstname;
+    std::string lastname;
+    std::string phone;
+    std::string memo;
 
-void    Book::setEmail(std::string str)
-{
-        _email = str;
-}
-
-void    Book::setMemo(std::string str)
-{
-        _memo = str;
-}
-
-std::string Book::getFirstName(void)
-{
-    return (_firstname);
-}
-
-std::string Book::getLastName(void)
-{
-    return (_lastname);
-}
-
-std::string Book::getPhoneNumber(void)
-{
-    return (_phonenumber);
-}
-
-std::string Book::getEmail(void)
-{
-    return (_email);
-}
-
-std::string Book::getMemo(void)
-{
-    return (_memo);
+    if (this->newContactIndex == 8)
+        this->newContactIndex = 0;
+    std::cout << "First name: ";
+    getline(std::cin, firstname);
+    std::cout << "Last name: ";
+    getline(std::cin, lastname);
+    std::cout << "Phone number: ";
+    getline(std::cin, phone);
+    std::cout << "Memo: ";
+    getline(std::cin, memo);
+    this->array[this->newContactIndex].setFirstName(firstname);
+    this->array[this->newContactIndex].setLastName(lastname);
+    this->array[this->newContactIndex].setPhoneNumber(phone);
+    this->array[this->newContactIndex].setMemo(memo);
+    this->newContactIndex ++;
+    if (newContactIndex < 8)
+        numOfContact++;
 }
