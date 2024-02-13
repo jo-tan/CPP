@@ -2,30 +2,29 @@
 
 int main(void)
 {
-    std::string cmd;
-    Contact    book[8];
-    int     count;
+    PhoneBook   PhoneBook;
+    std::string input;
+    std::string add = "ADD";
+    std::string search = "SEARCH";
+    std::string exit = "EXIT";
 
-    count = 0;
-    while (1)
+    system("clear");
+    std::cout << MAGENTA << "Hello! You are in your crappy phonebook now. =^. .^=" << RESET << std::endl;
+    while (42)
     {
-
-        getline(std::cin, cmd);
-        if (cmd == "EXIT")
-            break ;
-        else if (cmd == "SEARCH")
-        {
-            if (!count)
-                std::cout << "Empty phonebook. \"ADD\" to create new content." << std::endl;
-            else
-                search(book, count);
-        }
-        else if (cmd == "ADD")
-        {
-            
-        }
+        std::cout << YELLOW << "Please input the command ADD, SEARCH or EXIT : " << RESET;
+		getline(std::cin, input);
+		if (input == add)
+			PhoneBook.add();
+		else if (input == search)
+			PhoneBook.search();
+		else if (input == exit)
+		{
+			std::cout << MAGENTA << "Goodbye and see you next time! =^. .^=ฅ" << RESET << std::endl;
+			break;
+		}
         else
-            std::cout << "Invalid command. Please enter either \"ADD\" \"SEARCH\" or \"EAXIT\"" << std::endl;
-    }
+            std::cout << RED << "Invalid command... /ᐠ - ˕ -マ" << RESET << std::endl;
+	}
     return 0;
 }

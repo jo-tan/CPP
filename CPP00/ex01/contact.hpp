@@ -23,6 +23,6 @@ class Contact
         std::string     lastname;
         std::string     phonenumber;
         std::string     memo;
-}
+};
 
 #endif

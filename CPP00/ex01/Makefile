@@ -1,5 +1,7 @@
 NAME = phonebook
-SRC = phonebook.cpp
+SRC = 	phonebook.cpp \
+		contact.cpp \
+		main.cpp
 
 O_DIR = obj
 OBJ = $(addprefix $(O_DIR)/, $(SRC:.cpp=.o))
