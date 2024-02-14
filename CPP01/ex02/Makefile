@@ -5,7 +5,7 @@ O_DIR = obj
 OBJ = $(addprefix $(O_DIR)/, $(SRC:.cpp=.o))
 DEP = $(addprefix $(O_DIR)/, $(SRC:.cpp=.d))
 
-CC = g++
+CC = c++
 CF = -Wall -Wextra -Werror -g3 -std=c++98 -MMD
 
 all: $(NAME)
