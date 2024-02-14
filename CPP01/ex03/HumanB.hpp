@@ -3,11 +3,11 @@
 
 #include "Weapon.hpp"
 
-class HumanA
+class HumanB
 {
     public:
-        HumanA(std::string colnst &name, Weapon const type);
-        ~HumanA(void);
+        HumanB(std::string const &name, Weapon const type);
+        ~HumanB(void);
 
         void    attack();
     private:
