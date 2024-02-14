@@ -1,9 +1,9 @@
-#ifndef PHONEBOOK_HPP
-# define PHONEBOOK_HPP
+#ifndef __PHONEBOOK_HPP__
+# define __PHONEBOOK_HPP__
 
 #include <iostream>
 #include <iomanip>
-#include <cstdlib> // for atoi
+#include <cstdlib>
 #include <string>
 #include "contact.hpp"
 
@@ -25,15 +25,15 @@ class PhoneBook
         void    add(void);
         void    search();
     private:
-        const int   maxContact;
-        int         newContactIndex;
-        int         numOfContact;
-        Contact     array[8];
+        const int   _maxContact;
+        int         _newContactIndex;
+        int         _numOfContact;
+        Contact     _array[8];
 
-        std::string truncateString(const std::string& str, size_t maxLength) const;
-        void        printContact();
-        void        displayContact(int index);
-        int         getIndexFromInput(const std::string &input);
+        std::string _truncateString(const std::string& str, size_t maxLength) const;
+        void        _printContact();
+        void        _displayContact(int index);
+        int         _getIndexFromInput(const std::string &input);
 };
 
 #endif

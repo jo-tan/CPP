@@ -1,5 +1,5 @@
-#ifndef CONTACT_HPP
-# define CONTACT_HPP
+#ifndef __CONTACT_HPP__
+# define __CONTACT_HPP__
 
 # include <iostream>
 
@@ -19,10 +19,10 @@ class Contact
         std::string     getPhoneNumber(void);
         std::string     getMemo(void);
     private:
-        std::string     firstname;
-        std::string     lastname;
-        std::string     phonenumber;
-        std::string     memo;
+        std::string     _firstname;
+        std::string     _lastname;
+        std::string     _phonenumber;
+        std::string     _memo;
 };
 
 #endif
