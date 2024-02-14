@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   phonebook.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/14 10:02:16 by jo-tan            #+#    #+#             */
+/*   Updated: 2024/02/14 10:24:35 by jo-tan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "phonebook.hpp"
 
 PhoneBook::PhoneBook() : _maxContact(8), _newContactIndex(0), _numOfContact(0)
@@ -61,6 +73,8 @@ void    PhoneBook::_printContact()
 
 int     PhoneBook::_getIndexFromInput(const std::string &input)
 {
+    int index;
+    
     if (input.empty())
         return -1;
     for(size_t i = 0; i < input.length(); ++i)
@@ -68,7 +82,7 @@ int     PhoneBook::_getIndexFromInput(const std::string &input)
         if (!isdigit(input[i]))
             return -1;
     }
-    int index = std::stoi(input);
+    index = std::atoi(input.c_str());
     if (index < 0 || index > _maxContact || index >= _numOfContact)
         return -1;
     return index;
@@ -94,7 +108,7 @@ void    PhoneBook::search()
     }
     _printContact();
     std::cout << YELLOW << "Type an index number to obtain full information: " << RESET;
-    std::getline(std::cin, userInput);
+    getline(std::cin, userInput);
     index = _getIndexFromInput(userInput);
     if (index == -1)
     {

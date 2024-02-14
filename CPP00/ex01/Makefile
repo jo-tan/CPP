@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/02/14 10:02:04 by jo-tan            #+#    #+#              #
+#    Updated: 2024/02/14 10:11:39 by jo-tan           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = phonebook
 SRC = 	phonebook.cpp \
 		contact.cpp \
@@ -7,7 +19,7 @@ O_DIR = obj
 OBJ = $(addprefix $(O_DIR)/, $(SRC:.cpp=.o))
 DEP = $(addprefix $(O_DIR)/, $(SRC:.cpp=.d))
 
-CC = g++
+CC = c++
 CF = -Wall -Wextra -Werror -g3 -std=c++98 -MMD
 
 all: $(NAME)

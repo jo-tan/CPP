@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   phonebook.hpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/14 10:02:27 by jo-tan            #+#    #+#             */
+/*   Updated: 2024/02/14 10:15:57 by jo-tan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef __PHONEBOOK_HPP__
 # define __PHONEBOOK_HPP__
 
@@ -5,6 +17,7 @@
 #include <iomanip>
 #include <cstdlib>
 #include <string>
+#include <limits>
 #include "contact.hpp"
 
 #define RESET   "\033[0m"
