@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/02/14 10:42:28 by jo-tan            #+#    #+#              #
+#    Updated: 2024/02/14 10:42:33 by jo-tan           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = zombie00
 SRC = 	Zombie.cpp \
 		newZombie.cpp \
@@ -8,7 +20,7 @@ O_DIR = obj
 OBJ = $(addprefix $(O_DIR)/, $(SRC:.cpp=.o))
 DEP = $(addprefix $(O_DIR)/, $(SRC:.cpp=.d))
 
-CC = g++
+CC = c++
 CF = -Wall -Wextra -Werror -g3 -std=c++98 -MMD
 
 all: $(NAME)
