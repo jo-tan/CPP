@@ -1,13 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   replace.cpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/17 06:30:51 by jo-tan            #+#    #+#             */
+/*   Updated: 2024/02/17 07:12:31 by jo-tan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "replace.hpp"
 
 void	ft_replace(std::ifstream &file, std::string const &name, std::string const &from, std::string const &to)
 {
 	std::ofstream	newfile;
+	std::string		filename;
 	std::string		text;
 	std::size_t		pos;
 	std::size_t		i = 0;
 
-	newfile.open(name + ".replace", std::ofstream::trunc);
+	filename = name + ".replace";
+	newfile.open(filename.c_str(), std::ofstream::trunc);
     if (!newfile)
     {
         std::cerr << "Error: Unable to create the output file" << std::endl;
