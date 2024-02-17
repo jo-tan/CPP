@@ -4,21 +4,23 @@
 
 int main(void)
 {
-    Weapon  *weapon = NULL;
     {
-        Weapon club = weapon("crude spiked club");
+        Weapon club = Weapon("crude spiked club");
         
-        HumanA bob("Bob", club);
+        HumanA bob("Human A: Bob", club);
         bob.attack();
         club.setType("some other type of club");
         bob.attack();
     }
     {
-        Weapon club = weapon("crude spiked club");
-        HumanB jim("Jim");
+        Weapon club = Weapon("crude spiked club");
+        HumanB jim("Human B: Jim");
+        jim.attack();
         jim.setWeapon(club);
         jim.attack();
-        club.setType("some other type of club");
+        club.setType("hammer");
+        jim.attack();
+        club.setType("bow");
         jim.attack();
     }
     return 0;
