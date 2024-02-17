@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 06:32:39 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/02/17 06:32:42 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/02/17 08:13:31 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void    Harl::complain(std::string level)
 	        call(level, "ERROR", &Harl::error);
             break;
         }
-        case INVALID:
+        default:
         {
             call(level, "INVALID", &Harl::invalid);
             break;
