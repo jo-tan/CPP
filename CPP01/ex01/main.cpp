@@ -33,13 +33,13 @@ int main(void)
     delete[] zombies;
     std::cout << std::endl;
 
-    // size = 1;
-    // std::cout << "=== summon horde of Zombies " << size << " times ===" << std::endl;
-    // zombies = zombieHorde(size, NULL);
-    // for(int i = 0; i < size; ++i)
-    //     zombies[i].annouce();
-    // delete[] zombies;
-    // std::cout << std::endl;
+    size = 1;
+    std::cout << "=== summon horde of Zombies " << size << " times ===" << std::endl;
+    zombies = zombieHorde(size, "");
+    for(int i = 0; i < size; ++i)
+        zombies[i].annouce();
+    delete[] zombies;
+    std::cout << std::endl;
 
     return 0;
 }
