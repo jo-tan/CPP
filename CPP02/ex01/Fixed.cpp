@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 08:42:12 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/02/17 08:42:41 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/02/22 18:22:15 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ Fixed::Fixed(const int iNbr)
 Fixed::Fixed(const float fPt)
 {
     std::cout << "Float constructor called" << std::endl;
-    this->_value = std::roundf(fPt * (1 << Fixed::_fraction));
+    this->_value = roundf(fPt * (1 << Fixed::_fraction));
 }
 
 Fixed::~Fixed()
