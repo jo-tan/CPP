@@ -10,11 +10,48 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __FIXED_HPP__
-# define __FIXED_HPP__
+#pragma once
 
 # include <iostream>
-# include <string>
+# include <cmath>
 
+class Fixed
+{
+    private:
+        int                 _value;
+        static const int    _fraction = 8;
 
-#endif
+    public:
+        Fixed();
+        Fixed(const Fixed &nbr);
+        Fixed(const int iNbr);
+        Fixed(const float fPt);
+        ~Fixed();
+        Fixed & operator = (const Fixed &nbr);
+        bool operator > (const Fixed &nbr) const;
+        bool operator < (const Fixed &nbr) const;
+        bool operator >= (const Fixed &nbr) const;
+        bool operator <= (const Fixed &nbr) const;
+        bool operator == (const Fixed &nbr) const;
+        bool operator != (const Fixed &nbr) const;
+        Fixed operator + (const Fixed &nbr);
+        Fixed operator - (const Fixed &nbr);
+        Fixed operator * (const Fixed &nbr);
+        Fixed operator / (const Fixed &nbr);
+        Fixed operator ++ ();
+        Fixed operator ++ (int);
+        Fixed operator -- ();
+        Fixed operator -- (int);
+
+        static Fixed const &min(Fixed &n1, Fixed &n2);
+        static Fixed const &min(Fixed const &n1, Fixed const &n2);
+        static Fixed const &max(Fixed &n1, Fixed &n2);
+        static Fixed const &max(Fixed const &n1, Fixed const &n2);
+
+        int     getRawBits(void) const;
+        void    setRawBits(int const raw);
+        float	toFloat(void) const;
+		int		toInt(void) const;
+};
+
+std::ostream	&operator<<(std::ostream &stream, Fixed const &f);

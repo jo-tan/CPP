@@ -12,4 +12,53 @@
 
 #include "Fixed.hpp"
 
+Fixed::Fixed()  : _value(0)
+{
+    /*std::cout << "Default constructor called" << std::endl;*/
+}
+
+Fixed::Fixed(const Fixed &nbr)
+{
+    /*std::cout << "Copy constructor called" << std::endl;*/
+    *this = nbr;
+}
+
+Fixed::Fixed(const int iNbr)
+{
+    /*std::cout << "Int constructor called" << std::endl;*/
+    this->_value = (iNbr << Fixed::_fraction);
+}
+
+Fixed::Fixed(const float fPt)
+{
+    /*std::cout << "Float constructor called" << std::endl;*/
+    this->_value = std::roundf(fPt * (1 << Fixed::_fraction));
+}
+
+Fixed::~Fixed()
+{
+    /*std::cout << "Destructor called" << std::endl;*/
+}
+
+int Fixed::getRawBits(void) const
+{
+    return (this->_value);
+}
+
+float	Fixed::toFloat(void) const
+{
+	return ((float)this->_value / (float)(1 << Fixed::_fraction));
+}
+
+int		Fixed::toInt(void) const
+{
+	return (this->_value >> Fixed::_fraction);
+}
+
+std::ostream	&operator<<(std::ostream &output, Fixed const &f)
+{
+	output << f.toFloat();
+	return (output);
+}
+
 

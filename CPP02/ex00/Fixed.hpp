@@ -10,11 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __FIXED_HPP__
-# define __FIXED_HPP__
+#pragma once
 
 # include <iostream>
-# include <string>
 
+class Fixed
+{
+    private:
+        int                 _value;
+        static const int    _fraction = 8;
 
-#endif
+    public:
+        Fixed();
+        Fixed(const Fixed &nbr);
+        ~Fixed();
+        Fixed & operator = (const Fixed &nbr);
+
+        int     getRawBits(void) const;
+        void    setRawBits(int const raw);
+};
+

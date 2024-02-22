@@ -12,6 +12,8 @@
 
 NAME = ex02
 SRC = 	Fixed.cpp \
+		operator.cpp \
+		compare.cpp \
 		main.cpp
 
 O_DIR = obj
