@@ -10,7 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __SCAVTRAP_HPP__
-# define __SCAVTRAP_CPP__
+#pragma once
+#include "ClapTrap.hpp"
 
-#endif
+
+class ScavTrap: virtual public ClapTrap
+{
+	public: 
+		ScavTrap();
+		ScavTrap(std::string &name);
+		~ScavTrap();
+
+		ScavTrap &operator=(const ScavTrap &object);
+
+		void	guardGate();
+		void	attack(const std::string &target);
+		
+};
+

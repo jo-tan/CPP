@@ -10,4 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ScavTrap.hpp"
 
+int main()
+{
+    std::string name = "Scavvy";
+    ScavTrap a(name);
+    a.attack("the Dragon");
+    a.printStatus();
+
+    ScavTrap b;
+    ScavTrap c;
+    b.guardGate();
+    b.printStatus();
+    c.printStatus();
+    return 0;
+}

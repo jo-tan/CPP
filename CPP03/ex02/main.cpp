@@ -10,4 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
+int main()
+{
+    std::string name = "Fraggy";
+    FragTrap a(name);
+    a.attack("the Dragon");
+    a.printStatus();
+
+    FragTrap b;
+    b.highFivesGuys();
+    ScavTrap c;
+    c.guardGate();
+    b.printStatus();
+    c.printStatus();
+    return 0;
+}

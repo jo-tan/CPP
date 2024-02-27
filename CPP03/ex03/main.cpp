@@ -10,4 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#include "FragTrap.hpp"
+#include "ScavTrap.hpp"
+#include "DiamondTrap.hpp"
