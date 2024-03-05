@@ -14,7 +14,7 @@
 
 ScavTrap::ScavTrap() : ClapTrap()
 {
-    std::cout << GREY << "ScavTrap: default constructor" << RESET << std::endl;
+    std::cout << GREY << "ScavTrap: default constructor called" << RESET << std::endl;
     _HitPnt = 100;
     _EnergyPnt = 50;
     _AttDamage = 20;
@@ -22,15 +22,15 @@ ScavTrap::ScavTrap() : ClapTrap()
 
 ScavTrap::ScavTrap(std::string &name) : ClapTrap(name)
 {
-    std::cout << GREY << "ScavTrap: copy constructor" << RESET << std::endl;
-    _HitPnt = 100;
+    std::cout << GREY << "ScavTrap: copy constructor called" << RESET << std::endl;
+    _HitPnt = 50;
     _EnergyPnt = 50;
     _AttDamage = 20;
 }
 
 ScavTrap::~ScavTrap()
 {
-    std::cout << GREY << "ScavTrap: destructor" << RESET << std::endl;
+    std::cout << GREY << "ScavTrap destructor called" << RESET << std::endl;
 }
 
 ScavTrap &ScavTrap::operator=(const ScavTrap &object)
@@ -48,11 +48,13 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &object)
 
 void ScavTrap::guardGate()
 {
+    std::cout << "ScavTrap member function, guardGate() called" << std::endl;
     std::cout << CYAN << _name << GREEN << " is in Gate keeper mode." << RESET << std::endl;
 }
 
 void    ScavTrap::attack(const std::string &target)
 {
+    std::cout << "ScavTrap member function, attack() called" << std::endl;
     if (this->_EnergyPnt <= 0 || this->_HitPnt <= 0)
     {
         std::cout << CYAN << this->_name << RESET << " is out of energy or hit points." << std::endl;

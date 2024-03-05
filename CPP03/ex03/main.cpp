@@ -13,3 +13,23 @@
 #include "FragTrap.hpp"
 #include "ScavTrap.hpp"
 #include "DiamondTrap.hpp"
+
+int main()
+{
+
+    DiamondTrap a;
+    a.attack("a weak human");
+    a.attack("a weak human");
+    a.attack("a weak human");
+    a.attack("a weak human");
+    a.takeDamage(60);
+    a.takeDamage(41);
+    a.printStatus();
+
+    /*DiamondTrap b;
+    b.whoAmI();
+    DiamondTrap c("??WONDERER??");
+    c.highFivesGuys();*/
+
+    return 0;
+}

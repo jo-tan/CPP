@@ -38,6 +38,7 @@ protected:
 public:
     ClapTrap();
     ClapTrap(std::string &name);
+    ClapTrap(const std::string &name);
     ~ClapTrap();
 
     ClapTrap &operator=(const ClapTrap &object);

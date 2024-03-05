@@ -14,16 +14,25 @@
 
 FragTrap::FragTrap() : ClapTrap()
 {
-    std::cout << GREY << "FragTrap: default constructor" << RESET << std::endl;
-    _HitPnt = 100;
-    _EnergyPnt = 100;
+    std::cout << GREY << "FragTrap Default Constructor called" << RESET << std::endl;
+    _HitPnt = 200;
+    _EnergyPnt = 200;
     _AttDamage = 30;
 }
 
 FragTrap::FragTrap(std::string &name) : ClapTrap(name)
 {
-    _HitPnt = 100;
-    _EnergyPnt = 100;
+    std::cout << GREY << "FragTrap Copy Constructor called" << RESET << std::endl;
+    _HitPnt = 200;
+    _EnergyPnt = 200;
+    _AttDamage = 30;
+}
+
+FragTrap::FragTrap(const std::string &name) : ClapTrap(name)
+{
+    std::cout << GREY << "FragTrap Copy Constructor called" << RESET << std::endl;
+    _HitPnt = 200;
+    _EnergyPnt = 200;
     _AttDamage = 30;
 }
 
@@ -47,5 +56,6 @@ FragTrap &FragTrap::operator=(const FragTrap &object)
 
 void FragTrap::highFivesGuys()
 {
+    std::cout << "FragTrap member function, highFiveGuys() called" << std::endl;
     std::cout << CYAN << _name << MAGENTA << " wants a high Five\nHIGH FIVE! C:" << RESET << std::endl;
 }
