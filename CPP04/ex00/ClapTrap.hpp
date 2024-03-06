@@ -10,7 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __CLAPTRAP_HPP__
-# define __CLAPTRAP_HPP__
+#pragma once
 
-#endif
+class Animal
+{
+    protected:
+        std::string type;
+
+    public:
+        void makeSound();
+}
