@@ -16,7 +16,7 @@ ClapTrap::ClapTrap() : _HitPnt(10), _EnergyPnt(10), _AttDamage(0), _name("anonym
 {
     std::cout << GREY << "ClapTrap default Constructor: Initialize " << _name << " attributs: ";
     std::cout << "hit points (10), energy points (10), attack damage (0) and ";
-    std::cout << "name (" << CYAN << _name << RESET << ")" << RESET << std::endl << std::endl;
+    std::cout << "name (" << CYAN << _name << GREY << ")" << RESET << std::endl << std::endl;
     _anonymous++;
 }
 
@@ -24,15 +24,20 @@ ClapTrap::ClapTrap(std::string &name) : _HitPnt(10), _EnergyPnt(10), _AttDamage(
 {
     std::cout << GREY << "ClapTrap Copy Constructor: Initialize " << name << " attributs: ";
     std::cout << "hit points (10), energy points (10), attack damage (0) and ";
-    std::cout << "name (" << CYAN << name << RESET << ")" << RESET << std::endl << std::endl;
+    std::cout << "name (" << CYAN << name << GREY << ")" << RESET << std::endl << std::endl;
 }
 
 ClapTrap::ClapTrap(const std::string &name) : _HitPnt(10), _EnergyPnt(10), _AttDamage(0), _name(name)
 {
     std::cout << GREY << "ClapTrap Copy Constructor: Initialize " << name << " attributs: ";
-    std::cout << GREY << "Initialize " << name << " attributs: ";
     std::cout << "hit points (10), energy points (10), attack damage (0) and ";
-    std::cout << "name (" << CYAN << name << RESET << ")" << RESET << std::endl << std::endl;
+    std::cout << "name (" << CYAN << name << GREY << ")" << RESET << std::endl << std::endl;
+}
+
+ClapTrap::ClapTrap(const ClapTrap &copy)
+{
+    std::cout << GREY << "ClapTrap Copy Constructor called" << RESET << std::endl;
+	*this = copy;
 }
 
 ClapTrap::~ClapTrap()
@@ -63,8 +68,8 @@ void    ClapTrap::attack(const std::string &target)
         return ;
     }
     this->_HitPnt -= 1;
-    std::cout << "ClapTrap " << this->_name << " attacks ";
-    std::cout << target << ", causing " << YELLOW << _AttDamage << RESET << " points of damage!" << std::endl;
+    std::cout << "ClapTrap " << CYAN << this->_name << RESET << " attacks ";
+    std::cout << MAGENTA << target << RESET << ", causing " << YELLOW << _AttDamage << RESET << " points of damage!" << std::endl;
 }
 
 void    ClapTrap::takeDamage(unsigned int amount)

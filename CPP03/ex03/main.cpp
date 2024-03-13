@@ -16,20 +16,56 @@
 
 int main()
 {
+    std::cout << "\n\n### TESTING CLAPTRAP ###\n" << std::endl;
+	{
+        std::cout << BLUE << "\nConstructing" << RESET << std::endl;
+        ClapTrap a;
 
-    DiamondTrap a;
-    a.attack("a weak human");
-    a.attack("a weak human");
-    a.attack("a weak human");
-    a.attack("a weak human");
-    a.takeDamage(60);
-    a.takeDamage(41);
-    a.printStatus();
+        std::cout << BLUE << "\nTesting" << RESET << std::endl;
+        a.printStatus();
+        a.attack("a weak human");
+        std::cout << BLUE << "\nDeconstructing" << RESET << std::endl;
+    }
+    std::cout << "\n\n### TESTING SCAVTRAP ###\n" << std::endl;
+	{
+        std::cout << BLUE << "\nConstructing" << RESET << std::endl;
+        ScavTrap b;
 
-    /*DiamondTrap b;
-    b.whoAmI();
-    DiamondTrap c("??WONDERER??");
-    c.highFivesGuys();*/
+        std::cout << BLUE << "\nTesting" << RESET << std::endl;
+        b.printStatus();
+        b.guardGate();
+        b.guardGate();
+        std::cout << BLUE << "\nDeconstructing" << RESET << std::endl;
+    }
+    std::cout << "\n\n### TESTING SCAVTRAP ###\n" << std::endl;
+	{
+        std::cout << BLUE << "\nConstructing" << RESET << std::endl;
+        FragTrap c;
+
+        std::cout << BLUE << "\nTesting" << RESET << std::endl;
+        c.printStatus();
+        c.highFivesGuys();
+        std::cout << BLUE << "\nDeconstructing" << RESET << std::endl;
+    }
+
+    std::cout << "\n\n### TESTING DIAMONDTRAP ###\n" << std::endl;
+	{
+		std::cout << BLUE << "\nConstructing" << RESET << std::endl;
+		DiamondTrap x;
+		DiamondTrap y("???");
+		DiamondTrap z(x);
+
+		std::cout << BLUE << "\nTesting" << RESET << std::endl;
+		x.whoAmI();
+		x.attack("some random guy");
+		y.whoAmI();
+		y.attack("a testing object");
+        y.takeDamage(60);
+        y.takeDamage(41);
+        y.printStatus();
+		z.whoAmI();
+		std::cout << BLUE << "\nDeconstructing" << RESET << std::endl;
+	}
 
     return 0;
 }

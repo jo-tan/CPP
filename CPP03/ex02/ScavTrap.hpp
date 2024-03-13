@@ -16,9 +16,13 @@
 
 class ScavTrap: virtual public ClapTrap
 {
+	private:
+		bool _gate;
 	public: 
 		ScavTrap();
 		ScavTrap(std::string &name);
+		ScavTrap(const std::string &name);
+		ScavTrap(const ScavTrap &copy);
 		~ScavTrap();
 
 		ScavTrap &operator=(const ScavTrap &object);

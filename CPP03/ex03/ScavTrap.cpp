@@ -18,14 +18,30 @@ ScavTrap::ScavTrap() : ClapTrap()
     _HitPnt = 100;
     _EnergyPnt = 50;
     _AttDamage = 20;
+    _gate = false;
 }
 
 ScavTrap::ScavTrap(std::string &name) : ClapTrap(name)
 {
-    std::cout << GREY << "ScavTrap: copy constructor called" << RESET << std::endl;
-    _HitPnt = 50;
+    std::cout << GREY << "ScavTrap: constructor with string variable called" << RESET << std::endl;
+    _HitPnt = 100;
     _EnergyPnt = 50;
     _AttDamage = 20;
+    _gate = false;
+}
+
+ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name)
+{
+    std::cout << GREY << "ScavTrap: constructor with string variable called" << RESET << std::endl;
+    _HitPnt = 100;
+    _EnergyPnt = 50;
+    _AttDamage = 20;
+}
+
+ScavTrap::ScavTrap(const ScavTrap &copy) : ClapTrap(copy)
+{
+    *this = copy;
+    std::cout << GREY << "ScavTrap: copy constructor called: " << RESET << std::endl;
 }
 
 ScavTrap::~ScavTrap()
@@ -36,25 +52,28 @@ ScavTrap::~ScavTrap()
 ScavTrap &ScavTrap::operator=(const ScavTrap &object)
 {
     std::cout << GREY << "ScavTrap assignment operator called" << RESET << std::endl;
-    if (this != &object)
-    {
-        _name = object._name;
-        _HitPnt = object._HitPnt;
-        _EnergyPnt = object._EnergyPnt;
-        _AttDamage = object._AttDamage;
-    }
+    _name = object._name;
+    _HitPnt = object._HitPnt;
+    _EnergyPnt = object._EnergyPnt;
+    _AttDamage = object._AttDamage;
     return *this;
 }
 
 void ScavTrap::guardGate()
 {
-    std::cout << "ScavTrap member function, guardGate() called" << std::endl;
-    std::cout << CYAN << _name << GREEN << " is in Gate keeper mode." << RESET << std::endl;
+    std::cout << GREY << "ScavTrap member function, guardGate() called" << RESET << std::endl;
+    if (this->_gate == false)
+    {
+        this->_gate = true;
+        std::cout << CYAN << _name << GREEN << " : Gate keeper mode is ON." << RESET << std::endl;
+    }
+    else
+        std::cout << CYAN << _name << WHITE << " is guarding the gate already." << RESET << std::endl;
 }
 
 void    ScavTrap::attack(const std::string &target)
 {
-    std::cout << "ScavTrap member function, attack() called" << std::endl;
+    std::cout << GREY << "ScavTrap member function, attack() called" << RESET << std::endl;
     if (this->_EnergyPnt <= 0 || this->_HitPnt <= 0)
     {
         std::cout << CYAN << this->_name << RESET << " is out of energy or hit points." << std::endl;
