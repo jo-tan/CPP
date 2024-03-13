@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 08:54:44 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/02/17 08:55:24 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/03/13 15:20:02 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 # include <iostream>
 # include <string>
+# include <sstream>
 
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
@@ -24,6 +25,7 @@
 #define CYAN    "\033[36m"
 #define WHITE   "\033[37m"
 #define GREY    "\033[38;5;241m"
+
 
 static unsigned int _anonymous = 1;
 
@@ -49,3 +51,5 @@ public:
     void    beRepaired(unsigned int amount);
     void    printStatus();
 };
+
+std::string UIntToString(unsigned int num);

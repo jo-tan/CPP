@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 08:54:22 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/02/17 08:54:25 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/03/13 15:37:16 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int main()
         b.guardGate();
         std::cout << BLUE << "\nDeconstructing" << RESET << std::endl;
     }
-    std::cout << "\n\n### TESTING SCAVTRAP ###\n" << std::endl;
+    std::cout << "\n\n### TESTING FRAGTRAP ###\n" << std::endl;
 	{
         std::cout << BLUE << "\nConstructing" << RESET << std::endl;
         FragTrap c;

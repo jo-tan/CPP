@@ -6,13 +6,13 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 08:55:31 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/02/17 08:55:49 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/03/13 15:32:19 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() : _HitPnt(10), _EnergyPnt(10), _AttDamage(0), _name("anonymous " + std::to_string(_anonymous))
+ClapTrap::ClapTrap() : _HitPnt(10), _EnergyPnt(10), _AttDamage(0), _name("anonymous " + UIntToString(_anonymous))
 {
     std::cout << GREY << "ClapTrap default Constructor: Initialize " << _name << " attributs: ";
     std::cout << "hit points (10), energy points (10), attack damage (0) and ";
@@ -42,7 +42,7 @@ ClapTrap::ClapTrap(const ClapTrap &copy)
 
 ClapTrap::~ClapTrap()
 {
-    std::cout << "ClapTrap " << CYAN << _name << RESET << " has been destroyed. RIP." << std::endl;
+    std::cout << "ClapTrap " << CYAN << _name << RESET << " has been destroyed." << std::endl;
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &object)
@@ -68,7 +68,7 @@ void    ClapTrap::attack(const std::string &target)
         return ;
     }
     this->_HitPnt -= 1;
-    std::cout << "ClapTrap " << CYAN << this->_name << RESET << " attacks ";
+    std::cout << CYAN << this->_name << RESET << " attacks ";
     std::cout << MAGENTA << target << RESET << ", causing " << YELLOW << _AttDamage << RESET << " points of damage!" << std::endl;
 }
 
@@ -98,8 +98,8 @@ void    ClapTrap::beRepaired(unsigned int amount)
     }
     if (this->_EnergyPnt < amount)
     {
-        std::cout << this->_name << "does not have enough energy points required for repair..." << std::endl;
-        std::cout << "Amount request: " << amount << " Amount of Energy Points: " << _EnergyPnt << std::endl;
+        std::cout << this->_name << " does not have enough energy points required for repair..." << std::endl;
+        std::cout << "Amount request: " << amount << " || Amount of Energy Points: " << _EnergyPnt << std::endl;
         return ;
     }
     _EnergyPnt -= amount;
@@ -117,4 +117,11 @@ void    ClapTrap::printStatus()
     std::cout << "Energy Points: " << _EnergyPnt << std::endl;
     std::cout << "Attack Damage: " << _AttDamage << std::endl;
     std::cout << "====================" << std::endl;
+}
+
+std::string UIntToString(unsigned int num)
+{
+    std::ostringstream temp;
+    temp << num;
+    return temp.str();
 }
