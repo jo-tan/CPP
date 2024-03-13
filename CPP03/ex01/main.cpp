@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 08:54:22 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/03/13 15:49:56 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/03/13 16:02:49 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int main()
 
         std::cout << BLUE << "\nTesting" << RESET << std::endl;
         b.attack("someone");
+        b.takeDamage(22);
+        b.beRepaired(22);
         b.printStatus();
         b.guardGate();
         b.guardGate();

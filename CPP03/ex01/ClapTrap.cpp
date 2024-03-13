@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 08:55:31 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/03/13 15:32:19 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/03/13 16:04:37 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ void    ClapTrap::beRepaired(unsigned int amount)
     }
     _EnergyPnt -= amount;
     _HitPnt += amount;
-    std::cout << "ClapTrap " << this->_name << "repaired ";
-    std::cout << amount << " of hit points." << std::endl;
+    std::cout << CYAN << this->_name << RESET << " repaired ";
+    std::cout << YELLOW << amount << RESET << " of hit points." << std::endl;
 }
 
 void    ClapTrap::printStatus()
