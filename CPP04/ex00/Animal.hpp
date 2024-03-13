@@ -11,12 +11,20 @@
 /* ************************************************************************** */
 
 #pragma once
+#include <iostream>
+#include <string>
 
 class Animal
 {
     protected:
-        std::string type;
+        std::string _type;
 
     public:
-        void makeSound();
+        Animal();
+        Animal(const Animal &new);
+        virtual ~Animal();
+
+        Animal &operator=(const Animal &copy);
+        
+        virtual void makeSound()const;
 }
