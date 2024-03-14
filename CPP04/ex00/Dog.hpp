@@ -2,17 +2,14 @@
 
 #include "Animal.hpp"
 
-class Dog
+class Dog: public Animal
 {
-    protected:
-        std::string _type;
-
     public:
         Dog();
-        Dog(const Dog &new);
+        Dog(const Dog &copy);
         ~Dog();
 
-        Dog &operator=(const Dog &copy);
+        Dog &operator=(const Dog &obj);
         
         void makeSound()const;
-}
+};

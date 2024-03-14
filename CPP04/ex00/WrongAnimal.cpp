@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.cpp                                         :+:      :+:    :+:   */
+/*   WrongAnimal.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,39 +10,39 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#include "WrongAnimal.hpp"
 
-Animal::Animal():_type("Animal")
+WrongAnimal::WrongAnimal() : _type("WrongAnimal")
 {
-    std::cout << GREY << "Class Animal: Default Constructor" << RESET << std::endl;
+    std::cout << GREY << "Class WrongAnimal: Default Constructor" << RESET << std::endl;
 }
 
-Animal::Animal(const Animal &copy)
+WrongAnimal::WrongAnimal(const WrongAnimal &copy)
 {
     *this = copy;
-    std::cout << GREY << "Class Animal: Copy Constructor" << RESET << std::endl;
+    std::cout << GREY << "Class WrongAnimal: Copy Constructor" << RESET << std::endl;
 }
 
-Animal::~Animal()
+WrongAnimal::~WrongAnimal()
 {
-    std::cout << GREY << "Class Animal: Deconstructor" << RESET << std::endl;
+    std::cout << GREY << "Class WrongAnimal: Deconstructor" << RESET << std::endl;
 }
 
-Animal &Animal::operator=(const Animal &obj)
+WrongAnimal &WrongAnimal::operator=(const WrongAnimal &obj)
 {
-    std::cout << GREY << "Class Animal: Assignation Operator" << RESET << std::endl;
+    std::cout << GREY << "Class WrongAnimal: Assignation Operator" << RESET << std::endl;
     if (this == &obj)
         return *this;
     this->_type = obj._type;
     return *this;
 }
 
-void    Animal::makeSound()const
+void    WrongAnimal::makeSound()const
 {
-    std::cout << BLUE << "... Animal doesn't have a specific sound ..." << RESET << std::endl;
+    std::cout << MAGENTA << "??? (Silent) ???" << RESET << std::endl;
 }
 
-std::string Animal::getType()const
+std::string WrongAnimal::getType()const
 {
     return _type;
 }

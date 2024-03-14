@@ -2,17 +2,14 @@
 
 #include "Animal.hpp"
 
-class WrongCat
+class Cat: public Animal
 {
-    protected:
-        std::string _type;
-
     public:
-        WrongCat();
-        WrongCat(const WrongCat &new);
-        ~WrongCat();
+        Cat();
+        Cat(const Cat &copy);
+        ~Cat();
 
-        WrongCat &operator=(const WrongCat &copy);
+        Cat &operator=(const Cat &obj);
         
         void makeSound()const;
-}
+};

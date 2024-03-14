@@ -1,18 +1,15 @@
 #pragma once
 
-#include "Animal.hpp"
+#include "WrongAnimal.hpp"
 
-class WrongCat
+class WrongCat: public WrongAnimal
 {
-    protected:
-        std::string _type;
-
     public:
         WrongCat();
-        WrongCat(const WrongCat &new);
+        WrongCat(const WrongCat &copy);
         ~WrongCat();
 
-        WrongCat &operator=(const WrongCat &copy);
+        WrongCat &operator=(const WrongCat &obj);
         
         void makeSound()const;
-}
+};

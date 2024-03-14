@@ -10,8 +10,12 @@
 #                                                                              #
 # **************************************************************************** #
 
-AME = ex00
-SRC = 	ClapTrap.cpp \
+NAME = ex00
+SRC = 	Animal.cpp \
+		Cat.cpp \
+		Dog.cpp \
+		WrongAnimal.cpp \
+		WrongCat.cpp \
 		main.cpp
 
 O_DIR = obj
