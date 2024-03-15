@@ -18,7 +18,7 @@
 
 int main()
 {
-    std::cout << "TEST 1: check memory leaks" << std::endl; 
+    std::cout << "**** TEST 1: check memory leaks ****" << std::endl; 
     std::cout << "=== CONSTRUCT ===" << std::endl;
     {
         const Animal* dog = new Dog();
@@ -29,7 +29,7 @@ int main()
         delete cat;
     }
 
-    std::cout << "\n\n**** TEST WRONG ANIMAL and WRONG CAT ****\n" << std::endl;
+    std::cout << "\n\n**** TEST 2: check heap address for deep copy ****\n" << std::endl;
     std::cout << "=== CONSTRUCT ===" << std::endl;
     {
         
