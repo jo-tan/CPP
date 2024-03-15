@@ -45,7 +45,7 @@ int main()
         std::cout << "catPtr: ";
         catPtr->makeSound();
 
-        std::cout << "\n=== DECONSTRUCT ===" << std::endl;
+        std::cout << "\n=== DESTRUCT ===" << std::endl;
         delete meta;
         delete dog;
         delete cat;
@@ -65,7 +65,7 @@ int main()
         base->makeSound(); 
         derived->makeSound(); //will output the wrong cat sound
 
-        std::cout << "\n=== DECONSTRUCT ===" << std::endl;
+        std::cout << "\n=== DESTRUCT ===" << std::endl;
         delete base;
         delete derived;
     }

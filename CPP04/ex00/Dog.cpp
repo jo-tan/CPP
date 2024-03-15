@@ -14,7 +14,7 @@ Dog::Dog(const Dog &copy) : Animal()
 
 Dog::~Dog()
 {
-    std::cout << GREY << "Class Dog: Deconstructor" << RESET << std::endl;
+    std::cout << GREY << "Class Dog: Destructor" << RESET << std::endl;
 }
 
 Dog &Dog::operator=(const Dog &obj)

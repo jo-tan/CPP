@@ -25,7 +25,7 @@ Animal::Animal(const Animal &copy)
 
 Animal::~Animal()
 {
-    std::cout << GREY << "Class Animal: Deconstructor" << RESET << std::endl;
+    std::cout << GREY << "Class Animal: Destructor" << RESET << std::endl;
 }
 
 Animal &Animal::operator=(const Animal &obj)

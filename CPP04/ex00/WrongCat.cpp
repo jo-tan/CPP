@@ -14,7 +14,7 @@ WrongCat::WrongCat(const WrongCat &copy) : WrongAnimal()
 
 WrongCat::~WrongCat()
 {
-    std::cout << GREY << "Class WrongCat: Deconstructor" << RESET << std::endl;
+    std::cout << GREY << "Class WrongCat: Destructor" << RESET << std::endl;
 }
 
 WrongCat &WrongCat::operator=(const WrongCat &obj)

@@ -25,7 +25,7 @@ WrongAnimal::WrongAnimal(const WrongAnimal &copy)
 
 WrongAnimal::~WrongAnimal()
 {
-    std::cout << GREY << "Class WrongAnimal: Deconstructor" << RESET << std::endl;
+    std::cout << GREY << "Class WrongAnimal: Destructor" << RESET << std::endl;
 }
 
 WrongAnimal &WrongAnimal::operator=(const WrongAnimal &obj)

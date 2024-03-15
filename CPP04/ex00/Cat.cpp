@@ -14,7 +14,7 @@ Cat::Cat(const Cat &copy) : Animal()
 
 Cat::~Cat()
 {
-    std::cout << GREY << "Class Cat: Deconstructor" << RESET << std::endl;
+    std::cout << GREY << "Class Cat: Destructor" << RESET << std::endl;
 }
 
 Cat &Cat::operator=(const Cat &obj)
