@@ -14,6 +14,9 @@ NAME = ex01
 SRC = 	Animal.cpp \
 		Cat.cpp \
 		Dog.cpp \
+		WrongAnimal.cpp \
+		WrongCat.cpp \
+		Brain.cpp \
 		main.cpp
 
 O_DIR = obj
