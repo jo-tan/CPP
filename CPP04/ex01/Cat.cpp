@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/16 08:23:47 by jo-tan            #+#    #+#             */
+/*   Updated: 2024/03/16 08:39:49 by jo-tan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Cat.hpp"
 
 Cat::Cat() : Animal()
@@ -7,8 +19,7 @@ Cat::Cat() : Animal()
     this->_brain = new Brain();
     if (this->_brain == NULL)
     {
-        perror ("Cat: new Brain() allocation failed");
-        std::cerr << "Exit the program..." << std::endl;
+        std::cerr << "Cat: new Brain() allocation failed.\nExit the program..." << std::endl;
         exit(1);
     }
 }
@@ -36,8 +47,7 @@ Cat &Cat::operator=(const Cat &obj)
         this->_brain = new Brain();
         if (this->_brain == NULL)
         {
-            perror ("Cat: new Brain() allocation failed");
-            std::cerr << "Exit the program..." << std::endl;
+            std::cerr << "Cat: new Brain() allocation failed.\nExit the program..." << std::endl;
             exit(1);
         }
         *this->_brain = *obj._brain;

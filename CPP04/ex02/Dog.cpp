@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/16 08:25:50 by jo-tan            #+#    #+#             */
+/*   Updated: 2024/03/16 08:42:35 by jo-tan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Dog.hpp"
 
 Dog::Dog() : Animal()
@@ -7,8 +19,7 @@ Dog::Dog() : Animal()
     this->_brain = new Brain();
     if (this->_brain == NULL)
     {
-        perror ("Dog: new Brain() alloDogion failed");
-        std::cerr << "Exit the program..." << std::endl;
+        std::cerr << "Dog: new Brain() alloDogion failed\nExit the program..." << std::endl;
         exit(1);
     }
 }
@@ -38,8 +49,7 @@ Dog &Dog::operator=(const Dog &obj)
         this->_brain = new Brain();
         if (this->_brain == NULL)
         {
-            perror ("Dog: new Brain() allocation failed");
-            std::cerr << "Exit the program..." << std::endl;
+            std::cerr << "Dog: new Brain() alloDogion failed\nExit the program..." << std::endl;
             exit(1);
         }
         *this->_brain = *obj._brain;

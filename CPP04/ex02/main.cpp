@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 08:54:22 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/02/17 08:54:25 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/03/16 08:43:50 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ int main()
                 meta[i] = new Dog();
                 if (meta[i] == NULL)
                 {
-                    perror ("Main(): new Dog() allocation failed");
-                    std::cerr << "Exit the program..." << std::endl;
+                    std::cerr << "Main(): new Dog() allocation failed\nExit the program..." << std::endl;
                     exit(1);
                 }
             }
@@ -40,8 +39,7 @@ int main()
                 meta[i] = new Cat();
                 if (meta[i] == NULL)
                 {
-                    perror ("Main(): new Cat() allocation failed");
-                    std::cerr << "Exit the program..." << std::endl;
+                    std::cerr << "Main(): new Cat() allocation failed\nExit the program..." << std::endl;
                     exit(1);
                 }
             }
