@@ -26,15 +26,13 @@ Dog::~Dog()
 }
 
 /* 1. check for self-assignment 2. copy non-pointer member
-3. if existing _brain is not null, delete the old one*/
+3. allocate new Brain and if new failed, exit 1 */
 Dog &Dog::operator=(const Dog &obj)
 {
     std::cout << GREY << "Class Dog: Assignation Operator" << RESET << std::endl;
     if(this != &obj)
     {
         this->_type = obj._type;
-        if (this->_brain)
-            delete this->_brain;
         this->_brain = new Brain();
         if (this->_brain == NULL)
         {
