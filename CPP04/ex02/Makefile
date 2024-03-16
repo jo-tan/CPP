@@ -6,14 +6,17 @@
 #    By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/17 08:54:04 by jo-tan            #+#    #+#              #
-#    Updated: 2024/02/17 09:05:31 by jo-tan           ###   ########.fr        #
+#    Updated: 2024/02/17 08:56:46 by jo-tan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-AME = ex00
-SRC = 	ClapTrap.cpp \
-		ScavTrap.cpp \
-		FragTrap.cpp \
+NAME = ex02
+SRC = 	Animal.cpp \
+		Cat.cpp \
+		Dog.cpp \
+		WrongAnimal.cpp \
+		WrongCat.cpp \
+		Brain.cpp \
 		main.cpp
 
 O_DIR = obj

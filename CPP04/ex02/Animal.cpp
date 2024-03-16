@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClapTrap.cpp                                       :+:      :+:    :+:   */
+/*   Animal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,4 +10,37 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "Animal.hpp"
+
+Animal::Animal():_type("Animal")
+{
+    std::cout << GREY << "Class Animal: Default Constructor" << RESET << std::endl;
+}
+
+Animal::Animal(const Animal &copy)
+{
+    *this = copy;
+    std::cout << GREY << "Class Animal: Copy Constructor" << RESET << std::endl;
+}
+
+Animal::~Animal()
+{
+    std::cout << GREY << "Class Animal: Destructor" << RESET << std::endl;
+}
+
+Animal &Animal::operator=(const Animal &obj)
+{
+    std::cout << GREY << "Class Animal: Assignation Operator" << RESET << std::endl;
+    if (this == &obj)
+        return *this;
+    this->_type = obj._type;
+    return *this;
+}
+
+void    Animal::makeSound()const
+{}
+
+std::string Animal::getType()const
+{
+    return _type;
+}
