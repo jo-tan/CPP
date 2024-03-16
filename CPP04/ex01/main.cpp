@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 08:54:22 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/03/16 08:31:43 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/03/16 09:04:19 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,14 @@ int main()
             exit(1);
         }
         
+        Cat catD;
+        Cat catC = catD;
+        
         std::cout << "\n**** PROOF OF DEEP COPY ****" << std::endl;
-        std::cout << "CatA's heap address : " << static_cast<void*>(catA) << std::endl;
+        std::cout << "CatA's heap address: " << static_cast<void*>(catA) << std::endl;
         std::cout << "CatB's heap address: " << static_cast<void*>(catB) << std::endl;
+        std::cout << "CatC's address: " << std::__addressof(catC) << std::endl;
+        std::cout << "CatD's address: " << std::__addressof(catD) << std::endl;
 
         std::cout << "\n**** Compare CatA and CatB's ideas ****" << std::endl;
         std::cout << "\n=== catA's ideas ===" << std::endl;

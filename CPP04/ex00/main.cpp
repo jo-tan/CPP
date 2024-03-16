@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 08:54:22 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/03/16 08:22:33 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/03/16 08:53:58 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,24 @@ int main()
     {
         const WrongAnimal* base = new WrongAnimal();
         const WrongAnimal* derived = new WrongCat();
+        const WrongCat* cat = new WrongCat();
 
         std::cout << "\n--- GET TYPE ---" << std::endl;
         std::cout << base->getType() << " " << std::endl;
         std::cout << derived->getType() << " " << std::endl;
 
         std::cout << "\n--- MAKE SOUND ---" << std::endl;
+        std::cout << "WrongAnimal: ";
         base->makeSound(); 
-        derived->makeSound(); //will output the wrong cat sound
-
+        std::cout << "WrongAnimal pointer to new WrongCat: ";
+        derived->makeSound(); //will NOT output the wrong cat sound
+        std::cout << "WrongCat: ";
+        cat->makeSound();
+        
         std::cout << "\n=== DESTRUCT ===" << std::endl;
         delete base;
         delete derived;
+        delete cat;
     }
 
 return 0;
