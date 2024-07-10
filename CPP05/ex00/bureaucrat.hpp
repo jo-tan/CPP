@@ -11,25 +11,40 @@
 /* ************************************************************************** */
 
 #pragma once
-#include <iostream>
-#include <exception>
+# include <iostream>
+# include <exception>
+# include <string>
 
 class Bureaucrat
 {
 	private:
 		const	std::string _name;
+		int		_grade;
+		void	setGrade(int grade);
 
 	public:
 		Bureaucrat();
 		Bureaucrat(int grade, std::string name);
 		~Bureaucrat();
-
+		Bureaucrat(Bureaucrat const &obj);
 		Bureaucrat &operator=(const Bureaucrat &obj);
 		
-		std::string	getName();
-		int		getGrade();
-		GradeTooHighException;
-		GradeTooLowException;
-		UpGrade; //e.g. lv.3 to lv.2
-		DownGrade;//if grade is out of range, return the same exceptions as the constructor
+		std::string	getName()const;
+		int			getGrade()const;
+		void		UpGrade();
+		void		DownGrade();
+
+
+		class GradeTooHighException : public std::exception{
+			public:
+				const char *what() const throw(){
+					return "Grade too high!";
+				}
+		};
+		class GradeTooLowException : public std::exception{
+			public:
+				const char *what() const throw(){
+					return "Grade too low!";
+				}
+		};
 };
