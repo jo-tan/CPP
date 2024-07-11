@@ -48,3 +48,104 @@ class Bureaucrat
 				}
 		};
 };
+
+
+/*?*/
+
+#ifndef BUREAUCRAT_HPP
+#define BUREAUCRAT_HPP
+
+#include <iostream>
+
+class Bureaucrat
+{
+private:
+    const std::string   _name;
+    int                 _grade;
+
+    Bureaucrat();
+
+public:
+    Bureaucrat( const std::string& name, int grade );
+    Bureaucrat( const Bureaucrat& src );
+    ~Bureaucrat();
+
+    Bureaucrat& operator=( const Bureaucrat& rhs );
+
+    std::string getName() const;
+    int         getGrade() const;
+
+    void        incrementGrade();
+    void        decrementGrade();
+
+    /* ---------------- Exception Classes ---------------- */
+    class GradeTooHighException : public std::exception {
+        public:
+            virtual const char* what() const throw() { return "Grade too high"; }
+    };
+    class GradeTooLowException : public std::exception {
+        public:
+            virtual const char* what() const throw() { return "Grade too low"; }
+    };
+
+};
+
+std::ostream&   operator<<( std::ostream& o, const Bureaucrat& rhs );
+
+#endif // BUREAUCRAT_HPP
+
+/*other way*/
+// Header-protection
+#pragma once
+
+// Includes
+#include <string>
+#include <iostream>
+
+// classes
+
+class Bureaucrat
+{
+	private:
+		const std::string _name;
+		size_t _grade;
+		// Setter
+		void setGrade(int grade);
+
+	public:
+	// Constructors
+		Bureaucrat();
+		Bureaucrat(const Bureaucrat &src);
+		Bureaucrat(int grade);
+		Bureaucrat(const std::string name);
+		Bureaucrat(const std::string name, int grade);
+
+	// Deconstructors
+		~Bureaucrat();
+
+	// Overloaded Operators
+		Bureaucrat &operator=(const Bureaucrat &src);
+
+	// Public Methods
+		void incrementGrade(void);
+		void decrementGrade(void);
+	// Getter
+		const std::string getName(void)const;
+		size_t getGrade(void)const;
+
+	//Exceptions
+	class GradeTooLowException : public std::exception
+	{
+	public:
+		virtual const char *what() const throw();
+	};
+
+	class GradeTooHighException : public std::exception
+	{
+	public:
+		virtual const char *what() const throw();
+	};
+};
+
+// ostream Overload
+std::ostream	&operator<<(std::ostream &o, Bureaucrat *a);

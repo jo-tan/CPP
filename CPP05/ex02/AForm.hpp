@@ -28,3 +28,173 @@ crat. It must attempt to execute the form. If it’s successful, print something
 <bureaucrat> executed <form>
 If not, print an explicit error message.
 Implement and turn in some tests to ensure everything works as expected.
+
+
+/*?*/
+#include "Form.hpp"
+
+Form::Form( const std::string& name, int gradeToSign, int gradeToExecute ) : _name(name), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute) {
+    if ( gradeToSign < 1 || gradeToExecute < 1 )
+        throw Form::GradeTooHighException();
+    if ( gradeToSign > 150 || gradeToExecute > 150 )
+        throw Form::GradeTooLowException();
+}
+
+Form::Form( const Form& src ) : _name( src.getName() ), _gradeToSign( src.getGradeToSign() ), _gradeToExecute( src.getGradeToExecute() ) {}
+
+Form::~Form() {}
+
+Form&   Form::operator=( const Form& rhs ) {
+    if ( this != &rhs )
+        _signed = rhs.getSigned();
+    return *this;
+}
+
+std::string Form::getName() const {
+    return _name;
+}
+
+bool   Form::getSigned() const {
+    return _signed;
+}
+
+int   Form::getGradeToSign() const {
+    return _gradeToSign;
+}
+
+int   Form::getGradeToExecute() const {
+    return _gradeToExecute;
+}
+
+void    Form::beSigned(const Bureaucrat& bureaucrat) {
+    if ( bureaucrat.getGrade() > _gradeToSign ) {
+        throw Form::GradeTooLowException();
+    }
+    _signed = true;
+}
+
+std::ostream&   operator<<( std::ostream &o, const Form& rhs ) {
+    o << "------------- Form Info -------------" << std::endl;
+    o << "Form name: " << rhs.getName() << std::endl
+      << "Grade to sign: " << rhs.getGradeToSign() << std::endl
+      << "Grade to execute: " << rhs.getGradeToExecute() << std::endl;;
+    return o;
+}
+
+//header
+
+#ifndef FORM_HPP
+#define FORM_HPP
+
+#include "Bureaucrat.hpp"
+
+class Bureaucrat;
+
+class Form
+{
+private:
+    const std::string   _name;
+    bool                _signed;
+    const int           _gradeToSign;
+    const int           _gradeToExecute;
+
+    Form();
+
+public:
+    Form( const std::string& name, int gradeToSign, int gradeToExecute );
+    Form( const Form& src );
+    virtual    ~Form();
+
+    Form&   operator=( const Form& rhs );
+
+    std::string getName() const;
+    bool        getSigned() const;
+    int         getGradeToSign() const;
+    int         getGradeToExecute() const;
+
+    void        beSigned( const Bureaucrat& bureaucrat );
+
+    virtual void        execute( const Bureaucrat& executor ) const = 0;
+
+    /* ---------------- Exception Classes ---------------- */
+    class GradeTooHighException : public std::exception {
+        public:
+            virtual const char* what() const throw() { return "Grade too high"; }
+    };
+    class GradeTooLowException : public std::exception {
+        public:
+            virtual const char* what() const throw() { return "Grade too low"; }
+    };
+    class NotSignedException : public std::exception {
+        public:
+            virtual const char* what() const throw() { return "Form not signed"; }
+    };
+};
+
+std::ostream&   operator<<( std::ostream& o, const Form& rhs );
+
+#endif // FORM_HPP
+
+/*aForm*/
+#ifndef AFORM_HPP
+# define AFORM_HPP
+
+# include <iostream>
+# include "Bureaucrat.hpp"
+
+/*
+ * Form doesn't know what Bureaucrat is because it hasn't been declared yet.
+ * We then have to forward the declaration of the Bureaucrat class.
+ * This will inform the compiler that there is class named Bureaucrat that will
+ * be defined later.
+*/
+class Bureaucrat;
+
+class AForm {
+
+	private:
+		const std::string	_name;
+		const int			_requiredSign;
+		const int			_requiredExec;
+		bool				_signed;
+
+	public:
+		/* Constructors & Destructors */
+		AForm(void);
+		AForm(const std::string &name, const int requiredSign, const int requiredExec);
+		AForm(const AForm &form);
+		~AForm(void);
+
+		/* Exceptions */
+		class GradeTooHighException: public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
+		class GradeTooLowException: public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
+		class UnsignedFormException: public std::exception {
+			public:
+				virtual const char* what() const throw();	
+		};
+
+		/* Functions */
+		void			beSigned(Bureaucrat &bureaucrat);
+		void			execute(Bureaucrat const &executor) const;
+		virtual void	executeRequirements(Bureaucrat const &executor) const = 0;
+
+		/* Getters */
+		const std::string	&getName(void) const;
+		const int			&getRequiredSign(void) const;
+		const int			&getRequiredExec(void) const;
+		bool				isSigned(void) const;
+
+		/* Overloaded operators */
+		AForm	&operator=(const AForm &form);
+
+};
+
+std::ostream	&operator<<(std::ostream &out, const AForm &form);
+
+#endif
