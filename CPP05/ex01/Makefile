@@ -6,16 +6,13 @@
 #    By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/17 08:54:04 by jo-tan            #+#    #+#              #
-#    Updated: 2024/02/17 08:56:46 by jo-tan           ###   ########.fr        #
+#    Updated: 2024/07/11 17:25:02 by jo-tan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ex00
-SRC = 	Animal.cpp \
-		Cat.cpp \
-		Dog.cpp \
-		WrongAnimal.cpp \
-		WrongCat.cpp \
+NAME = ex01
+SRC = 	Bureaucrat.cpp \
+		Form.cpp \
 		main.cpp
 
 O_DIR = obj
@@ -50,4 +47,3 @@ fclean:		clean
 re:			fclean all
 
 .PHONY:		all clean fclean re
-

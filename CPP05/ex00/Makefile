@@ -6,16 +6,12 @@
 #    By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/17 08:54:04 by jo-tan            #+#    #+#              #
-#    Updated: 2024/02/17 08:56:46 by jo-tan           ###   ########.fr        #
+#    Updated: 2024/07/11 16:23:18 by jo-tan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ex00
-SRC = 	Animal.cpp \
-		Cat.cpp \
-		Dog.cpp \
-		WrongAnimal.cpp \
-		WrongCat.cpp \
+SRC = 	Bureaucrat.cpp \
 		main.cpp
 
 O_DIR = obj
