@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 16:45:27 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/07/11 18:52:54 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/07/12 18:25:38 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,10 @@ void	Bureaucrat::signForm(Form c)
 	else
 	{
 		std::cout << YELLOW << this->getName() << RESET << " couldn't signed" <<
-		GREEN << c.getName() << RESET << "because ...." << std::endl;
+		GREEN << c.getName() << RESET << "because " <<
+		YELLOW << this->getName() << RESET << "'s permission level(" << this->getGrade() <<
+		") cannot sign " << GREEN << c.getName() << RESET <<
+		"(" << c.getGradeToExecute() << ")" << std::endl;
 	}
 	/*If the form got signed,
 	it will print something like:
