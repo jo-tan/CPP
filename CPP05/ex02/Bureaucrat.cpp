@@ -5,8 +5,8 @@
 /* Constructors & Destructors */
 Bureaucrat::Bureaucrat(void): _name("unidentified") {
 	this->_grade = 150;
-	std::cout << BGRN "[Bureaucrat] " CRESET "New object called '" BCYN << \
-		this->_name << CRESET "' with grade " BCYN << this->_grade << CRESET \
+	std::cout << YELLOW "[Bureaucrat] " RESET "New object called '" YELLOW << \
+		this->_name << RESET "' with grade " YELLOW << this->_grade << RESET \
 		"..." << std::endl;
 }
 
@@ -16,20 +16,20 @@ Bureaucrat::Bureaucrat(const std::string &name, int grade): _name(name) {
 	else if (grade > 150)
 		throw Bureaucrat::GradeTooLowException();
 	this->_grade = grade;
-	std::cout << BGRN "[Bureaucrat] " CRESET "New object called '" BCYN << \
-		this->_name << CRESET "' with grade " BCYN << this->_grade << CRESET \
+	std::cout << YELLOW "[Bureaucrat] " RESET "New object called '" YELLOW << \
+		this->_name << RESET "' with grade " YELLOW << this->_grade << RESET \
 		"..." << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &bureaucrat): _name(bureaucrat.getName()) {
 	*this = bureaucrat;
-	std::cout << BGRN "[Bureaucrat] " CRESET "Copied object called '" BCYN << \
-		this->_name << CRESET "'..." << std::endl;
+	std::cout << YELLOW "[Bureaucrat] " RESET "Copied object called '" YELLOW << \
+		this->_name << RESET "'..." << std::endl;
 }
 
 Bureaucrat::~Bureaucrat(void) {
-	std::cout << BRED "[Bureaucrat] " CRESET "Deleting object called '" BCYN << \
-		this->_name << CRESET "'..." << std::endl;
+	std::cout << BRED "[Bureaucrat] " RESET "Deleting object called '" YELLOW << \
+		this->_name << RESET "'..." << std::endl;
 }
 
 /* Exceptions */
@@ -48,8 +48,8 @@ void	Bureaucrat::incrementGrade(void) {
 	this->_grade--;
 	if (this->_grade < 1)
 		throw Bureaucrat::GradeTooHighException();
-	std::cout << BYEL "[Bureaucrat] " CRESET "Grade incrementation succeeded. " << \
-		"(from " BCYN << oldGrade << CRESET " to " BCYN << this->_grade << CRESET ")" << std::endl;
+	std::cout << YELLOW "[Bureaucrat] " RESET "Grade incrementation succeeded. " << \
+		"(from " YELLOW << oldGrade << RESET " to " YELLOW << this->_grade << RESET ")" << std::endl;
 }
 
 void	Bureaucrat::decrementGrade(void) {
@@ -58,36 +58,36 @@ void	Bureaucrat::decrementGrade(void) {
 	this->_grade++;
 	if (this->_grade > 150)
 		throw Bureaucrat::GradeTooLowException();
-	std::cout << BYEL "[Bureaucrat] " CRESET "Grade decrementation succeeded. " << \
-		"(from " BCYN << oldGrade << CRESET " to " BCYN << this->_grade << CRESET ")" << std::endl;
+	std::cout << YELLOW "[Bureaucrat] " RESET "Grade decrementation succeeded. " << \
+		"(from " YELLOW << oldGrade << RESET " to " YELLOW << this->_grade << RESET ")" << std::endl;
 }
 
 void	Bureaucrat::signForm(AForm &form) {
 	if (form.isSigned()) {
-		std::cout << BYEL "[Bureaucrat] " BCYN << this->_name << CRESET " couldn't sign " << \
-			BCYN << form.getName() << CRESET " because it's already signed!" << std::endl;
+		std::cout << YELLOW "[Bureaucrat] " YELLOW << this->_name << RESET " couldn't sign " << \
+			YELLOW << form.getName() << RESET " because it's already signed!" << std::endl;
 		return ;
 	}
 	try {
 		form.beSigned(*this);
-		std::cout << BYEL "[Bureaucrat] " BCYN << this->_name << CRESET " signed " \
-			BCYN << form.getName() << CRESET "..." << std::endl;
+		std::cout << YELLOW "[Bureaucrat] " YELLOW << this->_name << RESET " signed " \
+			YELLOW << form.getName() << RESET "..." << std::endl;
 	} catch (std::exception &exception) {
-		std::cout << BYEL "[Bureaucrat] " BCYN << this->_name << CRESET " couldn't sign " \
-			BCYN << form.getName() << CRESET " because '" << BCYN << exception.what() << \
-			CRESET << "'..." << std::endl;
+		std::cout << YELLOW "[Bureaucrat] " YELLOW << this->_name << RESET " couldn't sign " \
+			YELLOW << form.getName() << RESET " because '" << YELLOW << exception.what() << \
+			RESET << "'..." << std::endl;
 	}
 }
 
 void	Bureaucrat::executeForm(AForm const &form) {
 	try {
 		form.execute(*this);
-		std::cout << BYEL "[Bureaucrat] " BCYN << this->_name << CRESET " executed " \
-			BCYN << form.getName() << CRESET "..." << std::endl;
+		std::cout << YELLOW "[Bureaucrat] " YELLOW << this->_name << RESET " executed " \
+			YELLOW << form.getName() << RESET "..." << std::endl;
 	} catch (std::exception &exception) {
-		std::cout << BYEL "[Bureaucrat] " BCYN << this->_name << CRESET " couldn't execute " \
-			BCYN << form.getName() << CRESET " because '" << BCYN << exception.what() << \
-			CRESET << "'..." << std::endl;
+		std::cout << YELLOW "[Bureaucrat] " YELLOW << this->_name << RESET " couldn't execute " \
+			YELLOW << form.getName() << RESET " because '" << YELLOW << exception.what() << \
+			RESET << "'..." << std::endl;
 	}
 }
 
@@ -108,7 +108,7 @@ Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &bureaucrat) {
 }
 
 std::ostream	&operator<<(std::ostream &out, const Bureaucrat &bureaucrat) {
-	out << BYEL "[Bureaucrat] " BCYN << bureaucrat.getName() << \
-		CRESET ", bureaucrat grade " BCYN << bureaucrat.getGrade() << CRESET ".";
+	out << YELLOW "[Bureaucrat] " YELLOW << bureaucrat.getName() << \
+		RESET ", bureaucrat grade " YELLOW << bureaucrat.getGrade() << RESET ".";
 	return (out);
 }
