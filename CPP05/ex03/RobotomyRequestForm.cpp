@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RobotomyRequestAForm.cpp                           :+:      :+:    :+:   */
+/*   RobotomyRequestForm.cpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 05:14:33 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/07/19 07:20:17 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/07/19 08:35:34 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "RobotomyRequestAForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
-RobotomyRequestAForm::RobotomyRequestAForm(const std::string &target) : AForm("Robotomy Request Form", 72, 45), _target(target) {}
+RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : AForm("Robotomy Request Form", 72, 45), _target(target) {}
 
-RobotomyRequestAForm::RobotomyRequestAForm(const RobotomyRequestAForm &cpy) : AForm(cpy), _target(cpy._target) {}
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &cpy) : AForm(cpy), _target(cpy._target) {}
 
-RobotomyRequestAForm::~RobotomyRequestAForm() {}
+RobotomyRequestForm::~RobotomyRequestForm() {}
 
-RobotomyRequestAForm &RobotomyRequestAForm::operator=(RobotomyRequestAForm &cpy) {
+RobotomyRequestForm &RobotomyRequestForm::operator=(RobotomyRequestForm &cpy) {
     (void)cpy;
     return *this;
 }
 
-void    RobotomyRequestAForm::execute(const Bureaucrat& executor) const {
+void    RobotomyRequestForm::execute(const Bureaucrat& executor) const {
     if ( this->getSigned() == false )
         throw AForm::NotSignedException();
     else if (executor.getGrade() > this->getGradeToExecute())

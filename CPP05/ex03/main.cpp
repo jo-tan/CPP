@@ -6,15 +6,15 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 05:15:15 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/07/19 07:58:23 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/07/19 08:34:40 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
-#include "ShrubberyCreationAForm.hpp"
-#include "RobotomyRequestAForm.hpp"
-#include "PresidentialPardonAForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 #include "Intern.hpp"
 
 int main( void )

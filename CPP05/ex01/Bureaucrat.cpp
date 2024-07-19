@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 16:45:27 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/07/12 18:25:38 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/07/19 04:12:23 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,31 +111,33 @@ void	Bureaucrat::Decrement()
 	std::cout << YELLOW << this->getName() << RESET << "'s new grade: " << YELLOW << this->getGrade() << RESET << std::endl;
 }
 
-void	Bureaucrat::signForm(Form c)
+void	Bureaucrat::signForm(Form &c)
 {
-	if (c.getSigned() == true)
+	if (c.getSigned() == false && (c.getGradeToSign() > this->getGrade()))
 	{
-		std::cout << YELLOW << this->getName() << RESET << "signed" <<
+		c.beSigned(*this);
+		std::cout << YELLOW << this->getName() << RESET << " signed " <<
 		GREEN << c.getName() << RESET << std::endl;
 	}
-	else
+	else if (c.getGradeToSign() < this->getGrade())
 	{
-		std::cout << YELLOW << this->getName() << RESET << " couldn't signed" <<
-		GREEN << c.getName() << RESET << "because " <<
+		std::cout << YELLOW << this->getName() << RESET << " couldn't signed " <<
+		GREEN << c.getName() << RESET << " because " <<
 		YELLOW << this->getName() << RESET << "'s permission level(" << this->getGrade() <<
 		") cannot sign " << GREEN << c.getName() << RESET <<
 		"(" << c.getGradeToExecute() << ")" << std::endl;
 	}
-	/*If the form got signed,
-	it will print something like:
-	<bureaucrat> signed <form>
-	Otherwise, it will print something like:
-	<bureaucrat> couldn’t sign <form> because <reason>.*/
+	else
+	{
+		std::cout << YELLOW << this->getName() << RESET << " couldn't signed " <<
+		GREEN << c.getName() << RESET << " because this form is already signed" << std::endl;
+	}
 }
 
 // ostream Overload
 std::ostream	&operator<<(std::ostream &o, Bureaucrat *a)
 {
-	o << "Bureaucrat " << a->getName() << ":\n\tgrade: " << a->getGrade();
+	o << "Bureaucrat " << YELLOW << a->getName() << RESET <<
+	":\n\tgrade: " << a->getGrade() << std::endl << std::endl;
 	return (o);
 }

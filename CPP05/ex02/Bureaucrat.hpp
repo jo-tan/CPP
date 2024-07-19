@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/19 05:11:45 by jo-tan            #+#    #+#             */
+/*   Updated: 2024/07/19 08:32:56 by jo-tan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #pragma once
 # include <iostream>
 # include <string>
@@ -36,7 +48,8 @@ class Bureaucrat
 		int			getGrade()const;
 		void		Increment();
 		void		Decrement();
-		void		signForm(Form f);
+		void		signForm(AForm &f);
+		void		executeForm(AForm const &Form);
 
 		/*Exception Class*/
 		class GradeTooHighException : public std::exception{
@@ -49,57 +62,4 @@ class Bureaucrat
 		};
 };
 
-// ostream Overload
 std::ostream	&operator<<(std::ostream &o, Bureaucrat *a);
-
-/*aForm*/
-/*
- * Bureaucrat doesn't know what Form is because it hasn't been declared yet.
- * We then have to forward the declaration of the Form class.
- * This will inform the compiler that there is class named Form that will
- * be defined later.
-*/
-/*class AForm;
-
-class Bureaucrat {
-	
-	private:
-		const std::string	_name;
-		int					_grade;
-
-	public:
-		/* Constructors & Destructors */
-		Bureaucrat(void);
-		Bureaucrat(const std::string &name, int grade);
-		Bureaucrat(const Bureaucrat &bureaucrat);
-		~Bureaucrat(void);
-
-		/* Exceptions */
-		class GradeTooHighException: public std::exception {
-			public:
-				virtual const char* what() const throw();
-		};
-
-		class GradeTooLowException: public std::exception {
-			public:
-				virtual const char* what() const throw();
-		};
-		
-		/* Functions */
-		void				incrementGrade(void);
-		void				decrementGrade(void);
-		void				signForm(AForm &form);
-		void				executeForm(AForm const &form);
-
-		/* Getters */
-		const std::string	&getName(void) const;
-		int					getGrade(void) const;
-
-		/* Overloaded operators */
-		Bureaucrat	&operator=(const Bureaucrat &bureaucrat);
-
-};
-
-std::ostream	&operator<<(std::ostream &out, const Bureaucrat &bureaucrat);
-
-*/

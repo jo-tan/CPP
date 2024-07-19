@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 05:15:25 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/07/19 05:39:56 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/07/19 08:37:17 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,9 @@ void	Bureaucrat::signForm(AForm &c) {
 	}
 }
 
-void	Bureaucrat::executeAForm(AForm const &AForm) {
-		AForm.execute(*this);
-		std::cout << YELLOW << this->getName() << RESET << " execute " << AForm.getName() << std::endl;
+void	Bureaucrat::executeForm(AForm const &Form) {
+		Form.execute(*this);
+		std::cout << YELLOW << this->getName() << RESET << " execute " << Form.getName() << std::endl;
 }
 
 // ostream Overload

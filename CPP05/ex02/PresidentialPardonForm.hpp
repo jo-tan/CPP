@@ -1,52 +1,29 @@
-/*?*/
-#ifndef PRESIDENTIALPARDONFORM_HPP
-#define PRESIDENTIALPARDONFORM_HPP
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PresidentialPardonAForm.hpp                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/19 05:12:45 by jo-tan            #+#    #+#             */
+/*   Updated: 2024/07/19 08:27:42 by jo-tan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "Form.hpp"
+#pragma once
+#include "AForm.hpp"
 
-class PresidentialPardonForm : public Form
+class PresidentialPardonForm : public AForm
 {
 private:
     std::string _target;
-
     PresidentialPardonForm();
 
 public:
-    PresidentialPardonForm( const std::string& target );
-    PresidentialPardonForm( const PresidentialPardonForm& src );
+    PresidentialPardonForm(const std::string& target );
+    PresidentialPardonForm(const PresidentialPardonForm &obj);
     ~PresidentialPardonForm();
-
-    PresidentialPardonForm& operator=( const PresidentialPardonForm& rhs );
+    PresidentialPardonForm& operator=(const PresidentialPardonForm &obj);
     
-    void execute( const Bureaucrat& executor ) const;
+    void execute(const Bureaucrat &executor) const;
 };
-
-#endif // PRESIDENTIALPARDONFORM_HPP
-
-/*aForm*/
-#ifndef PRESIDENTIALPARDONFORM_HPP
-# define PRESIDENTIALPARDONFORM_HPP
-
-# include "AForm.hpp"
-
-class PresidentialPardonForm : public AForm {
-	
-	private:
-		std::string	_target;
-
-	public:
-		/* Constructors & Destructors */
-		PresidentialPardonForm(void);
-		PresidentialPardonForm(std::string target);
-		PresidentialPardonForm(const PresidentialPardonForm &presidentialPardonForm);
-		~PresidentialPardonForm(void);
-
-		/* Functions */
-		virtual void	executeRequirements(Bureaucrat const &executor) const;
-
-		/* Overloaded operators */
-		PresidentialPardonForm	&operator=(const PresidentialPardonForm &presidentialPardonForm);
-	
-};
-
-#endif

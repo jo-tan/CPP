@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 16:45:27 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/07/11 17:23:27 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/07/19 05:17:49 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	Bureaucrat::Decrement()
 	std::cout << YELLOW << this->getName() << RESET << "'s new grade: " << YELLOW << this->getGrade() << RESET << std::endl;
 }
 
-// ostream Overload
+//ostream Overload
 std::ostream	&operator<<(std::ostream &o, Bureaucrat *a)
 {
 	o << "Bureaucrat " << a->getName() << ":\n\tgrade: " << a->getGrade();

@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 05:15:33 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/07/19 05:15:35 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/07/19 08:33:49 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ class Bureaucrat
 		void		Increment();
 		void		Decrement();
 		void		signForm(AForm &f);
-		void		executeAForm(AForm const &AForm);
+		void		executeForm(AForm const &AForm);
 
 		/*Exception Class*/
 		class GradeTooHighException : public std::exception{

@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 16:17:25 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/07/11 18:50:47 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/07/19 04:01:49 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ class Bureaucrat
 		int			getGrade()const;
 		void		Increment();
 		void		Decrement();
-		void		signForm(Form f);
+		void		signForm(Form &f);
 
 		/*Exception Class*/
 		class GradeTooHighException : public std::exception{

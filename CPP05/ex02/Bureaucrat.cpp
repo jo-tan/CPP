@@ -1,114 +1,136 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/19 05:11:52 by jo-tan            #+#    #+#             */
+/*   Updated: 2024/07/19 08:26:43 by jo-tan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-/*aForm*/
 #include "Bureaucrat.hpp"
+#include "AForm.hpp"
 
-/* Constructors & Destructors */
-Bureaucrat::Bureaucrat(void): _name("unidentified") {
-	this->_grade = 150;
-	std::cout << BGRN "[Bureaucrat] " CRESET "New object called '" BCYN << \
-		this->_name << CRESET "' with grade " BCYN << this->_grade << CRESET \
-		"..." << std::endl;
+Bureaucrat::Bureaucrat() : _name("default"), _grade(150) {
+	std::cout << GREY << "Bureaucrat: defualt contructor is called" << RESET << std::endl;
+	std::cout << "Bureaucrat Name: " << YELLOW << _name << RESET << " is created. Grade: ";
+	std::cout << YELLOW << _grade << RESET << std::endl;
 }
 
-Bureaucrat::Bureaucrat(const std::string &name, int grade): _name(name) {
+Bureaucrat::~Bureaucrat() {
+	std::cout << GREY << "Bureaucrat: decontructor is called" << RESET << std::endl;
+}
+
+Bureaucrat::Bureaucrat(int grade, const std::string name) : _name(name) {
+	std::cout << GREY << "Bureaucrat: contructor is called" << RESET << std::endl;
+	std::cout << "Bureaucrat Name: " << YELLOW << _name << RESET << " is created. Grade: ";
+	std::cout << YELLOW << grade << RESET << std::endl;
+	this->setGrade(grade);
+}
+
+Bureaucrat::Bureaucrat(const std::string name, int grade) : _name(name) {
+	std::cout << GREY << "Bureaucrat: contructor is called" << RESET << std::endl;
+	std::cout << "Bureaucrat Name: " << YELLOW << _name << RESET << " is created. Grade: ";
+	std::cout << YELLOW << grade << RESET << std::endl;
+	this->setGrade(grade);
+}
+
+Bureaucrat::Bureaucrat(const std::string name) : _name(name), _grade(150) {
+	std::cout << GREY << "Bureaucrat: contructor is called" << RESET << std::endl;
+	std::cout << "Bureaucrat Name: " << YELLOW << _name << RESET << " is created. Grade: ";
+	std::cout << YELLOW << _grade << RESET << std::endl;
+}
+
+Bureaucrat::Bureaucrat(int grade) : _name("default") {
+	std::cout << GREY << "Bureaucrat: contructor is called" << RESET << std::endl;
+	std::cout << "Bureaucrat Name: " << YELLOW << _name << RESET << " is created. Grade: ";
+	std::cout << YELLOW << grade << RESET << std::endl;
+	this->setGrade(grade);	
+}
+
+Bureaucrat::Bureaucrat(Bureaucrat const &obj) {
+	std::cout << GREY << "Bureaucrat: copy contructor is called to copy" << RESET << std::endl;
+	*this = obj;
+}
+
+Bureaucrat &Bureaucrat::operator=(Bureaucrat const &obj) {
+	std::cout << GREY << "Bureaucrat: assignation operator is called" << RESET << std::endl;
+	if (this == &obj)
+		return *this;
+	this->_grade = obj.getGrade();
+	return *this;
+}
+
+/*Setter & Getter*/
+void	Bureaucrat::setGrade(int grade) {
 	if (grade < 1)
 		throw Bureaucrat::GradeTooHighException();
 	else if (grade > 150)
 		throw Bureaucrat::GradeTooLowException();
-	this->_grade = grade;
-	std::cout << BGRN "[Bureaucrat] " CRESET "New object called '" BCYN << \
-		this->_name << CRESET "' with grade " BCYN << this->_grade << CRESET \
-		"..." << std::endl;
+	else
+		this->_grade = grade;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &bureaucrat): _name(bureaucrat.getName()) {
-	*this = bureaucrat;
-	std::cout << BGRN "[Bureaucrat] " CRESET "Copied object called '" BCYN << \
-		this->_name << CRESET "'..." << std::endl;
+std::string Bureaucrat::getName() const {
+	return this->_name;
 }
 
-Bureaucrat::~Bureaucrat(void) {
-	std::cout << BRED "[Bureaucrat] " CRESET "Deleting object called '" BCYN << \
-		this->_name << CRESET "'..." << std::endl;
+int	Bureaucrat::getGrade() const {
+	return this->_grade;
 }
 
-/* Exceptions */
-const char*	Bureaucrat::GradeTooHighException::what() const throw() {
-	return ("Grade is too high! (from highest 1 to lowest 150)");
-}
-
-const char* Bureaucrat::GradeTooLowException::what() const throw() {
-	return ("Grade is too low! (from highest 1 to lowest 150)");
-}
-
-/* Functions */
-void	Bureaucrat::incrementGrade(void) {
-	int	oldGrade = this->_grade;
-
-	this->_grade--;
-	if (this->_grade < 1)
+/*public function*/
+void	Bureaucrat::Increment() {
+	std::cout << BLUE << "Increment function is called" << RESET << std::endl;
+	if (this->_grade - 1 < 1)
 		throw Bureaucrat::GradeTooHighException();
-	std::cout << BYEL "[Bureaucrat] " CRESET "Grade incrementation succeeded. " << \
-		"(from " BCYN << oldGrade << CRESET " to " BCYN << this->_grade << CRESET ")" << std::endl;
+	else
+		this->_grade -= 1;
+	std::cout << YELLOW << this->getName() << RESET << "'s new grade: " << YELLOW << this->getGrade() << RESET << std::endl;
 }
 
-void	Bureaucrat::decrementGrade(void) {
-	int	oldGrade = this->_grade;
-
-	this->_grade++;
-	if (this->_grade > 150)
+void	Bureaucrat::Decrement() {
+	std::cout << BLUE << "Decrement function is called" << RESET << std::endl;
+	if (this->_grade + 1 > 150)
 		throw Bureaucrat::GradeTooLowException();
-	std::cout << BYEL "[Bureaucrat] " CRESET "Grade decrementation succeeded. " << \
-		"(from " BCYN << oldGrade << CRESET " to " BCYN << this->_grade << CRESET ")" << std::endl;
+	else
+		this->_grade += 1;
+	std::cout << YELLOW << this->getName() << RESET << "'s new grade: " << YELLOW << this->getGrade() << RESET << std::endl;
 }
 
-void	Bureaucrat::signForm(AForm &form) {
-	if (form.isSigned()) {
-		std::cout << BYEL "[Bureaucrat] " BCYN << this->_name << CRESET " couldn't sign " << \
-			BCYN << form.getName() << CRESET " because it's already signed!" << std::endl;
-		return ;
+void	Bureaucrat::signForm(AForm &c) {
+	if (c.getSigned() == false && (c.getGradeToSign() > this->getGrade()))
+	{
+		c.beSigned(*this);
+		std::cout << YELLOW << this->getName() << RESET << " signed " <<
+		GREEN << c.getName() << RESET << std::endl;
 	}
-	try {
-		form.beSigned(*this);
-		std::cout << BYEL "[Bureaucrat] " BCYN << this->_name << CRESET " signed " \
-			BCYN << form.getName() << CRESET "..." << std::endl;
-	} catch (std::exception &exception) {
-		std::cout << BYEL "[Bureaucrat] " BCYN << this->_name << CRESET " couldn't sign " \
-			BCYN << form.getName() << CRESET " because '" << BCYN << exception.what() << \
-			CRESET << "'..." << std::endl;
+	else if (c.getGradeToSign() < this->getGrade())
+	{
+		std::cout << YELLOW << this->getName() << RESET << " couldn't signed " <<
+		GREEN << c.getName() << RESET << " because " <<
+		YELLOW << this->getName() << RESET << "'s permission level(" << this->getGrade() <<
+		") cannot sign " << GREEN << c.getName() << RESET <<
+		"(" << c.getGradeToExecute() << ")" << std::endl;
 	}
-}
-
-void	Bureaucrat::executeForm(AForm const &form) {
-	try {
-		form.execute(*this);
-		std::cout << BYEL "[Bureaucrat] " BCYN << this->_name << CRESET " executed " \
-			BCYN << form.getName() << CRESET "..." << std::endl;
-	} catch (std::exception &exception) {
-		std::cout << BYEL "[Bureaucrat] " BCYN << this->_name << CRESET " couldn't execute " \
-			BCYN << form.getName() << CRESET " because '" << BCYN << exception.what() << \
-			CRESET << "'..." << std::endl;
+	else
+	{
+		std::cout << YELLOW << this->getName() << RESET << " couldn't signed " <<
+		GREEN << c.getName() << RESET << " because this form is already signed" << std::endl;
 	}
 }
 
-/* Getters */
-const std::string	&Bureaucrat::getName(void) const {
-	return (this->_name);
+void	Bureaucrat::executeForm(AForm const &f) {
+		f.execute(*this);
+		std::cout << YELLOW << this->getName() << RESET << " execute " << f.getName() << std::endl;
 }
 
-int	Bureaucrat::getGrade(void) const {
-	return (this->_grade);
-}
-
-/* Overloaded operators */
-Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &bureaucrat) {
-	if (this != &bureaucrat)
-		this->_grade = bureaucrat.getGrade();
-	return (*this);
-}
-
-std::ostream	&operator<<(std::ostream &out, const Bureaucrat &bureaucrat) {
-	out << BYEL "[Bureaucrat] " BCYN << bureaucrat.getName() << \
-		CRESET ", bureaucrat grade " BCYN << bureaucrat.getGrade() << CRESET ".";
-	return (out);
+/*Overload ostream*/
+std::ostream	&operator<<(std::ostream &o, Bureaucrat *a)
+{
+	o << "Bureaucrat " << YELLOW << a->getName() << RESET <<
+	":\n\tgrade: " << a->getGrade() << std::endl << std::endl;
+	return (o);
 }

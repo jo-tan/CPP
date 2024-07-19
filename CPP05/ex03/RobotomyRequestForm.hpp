@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RobotomyRequestAForm.hpp                           :+:      :+:    :+:   */
+/*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 05:14:41 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/07/19 07:20:23 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/07/19 08:35:57 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 #include "AForm.hpp"
 #include <stdlib.h>
 
-class RobotomyRequestAForm : public AForm
+class RobotomyRequestForm : public AForm
 {
 private:
     const std::string   _target;
-    RobotomyRequestAForm();
+    RobotomyRequestForm();
 
 public:
-    RobotomyRequestAForm(const std::string &target);
-    RobotomyRequestAForm(const RobotomyRequestAForm &cpy);
-    ~RobotomyRequestAForm();
-    RobotomyRequestAForm &operator=(RobotomyRequestAForm &cpy);
+    RobotomyRequestForm(const std::string &target);
+    RobotomyRequestForm(const RobotomyRequestForm &cpy);
+    ~RobotomyRequestForm();
+    RobotomyRequestForm &operator=(RobotomyRequestForm &cpy);
 
     void    execute(const Bureaucrat &executor) const;
 };

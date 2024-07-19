@@ -1,21 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Form.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/19 05:10:45 by jo-tan            #+#    #+#             */
+/*   Updated: 2024/07/19 05:21:09 by jo-tan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Form.hpp"
 
 // Constructors
 Form::Form(void): _name("Default Form"), _signed(false), _gradeToSign(150), _gradeToExecute(150)
 {
-	std::cout << "Form: Default Constructor called" << std::endl;
+	std::cout << GREY << "Form: Default Constructor called" << RESET << std::endl;
 }
 
-Form::Form(const Form &src): _name(src.getName() + "_copy"), _signed(false), _gradeToSign(src.getGradeToSign()), _gradeToExecute(src.getGradeToExecute())
+Form::Form(const Form &obj): _name(obj.getName() + "_copy"), _signed(false), _gradeToSign(obj.getGradeToSign()), _gradeToExecute(obj.getGradeToExecute())
 {
-	std::cout << "Form Copy Constructor called to copy " << src.getName() <<
-	" into " << this->getName() << std::endl;
-	*this = src;
+	std::cout << GREY << "Form Copy Constructor called to copy " << obj.getName() <<
+	" into " << this->getName() << RESET << std::endl;
+	*this = obj;
 }
 
 Form::Form(int gradeToSign, int gradeToExecute): _name("Default Form"), _signed(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
 {
-	std::cout << "Form: Constructor is called " << std::endl;
+	std::cout << GREY << "Form: Constructor is called " << RESET << std::endl;
 	const int i = this->getGradeToSign();
 	const int j = this->getGradeToExecute();
 	if (i > 150 || j > 150)
@@ -26,12 +38,12 @@ Form::Form(int gradeToSign, int gradeToExecute): _name("Default Form"), _signed(
 
 Form::Form(const std::string &name): _name(name), _signed(false), _gradeToSign(150), _gradeToExecute(150)
 {
-	std::cout << "Form: Constructor is called" << std::endl;
+	std::cout << GREY << "Form: Constructor is called" << RESET << std::endl;
 }
 
 Form::Form(const std::string &name, int gradeToSign, int gradeToExecute): _name(name), _signed(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
 {
-	std::cout << "Form: Constructor is called" << std::endl;
+	std::cout << GREY << "Form: Constructor is called" << RESET << std::endl;
 	const int i = this->getGradeToSign();
 	const int j = this->getGradeToExecute();
 	if (i > 150 || j > 150)
@@ -48,54 +60,64 @@ Form::~Form()
 // Overloaded Operators
 Form &Form::operator=(const Form &obj)
 {
-	std::cout << "Form Assignation operator called" << std::endl;
+	std::cout << GREY << "Form Assignation operator called" << RESET << std::endl;
 	if (this == &obj)
 		return *this;
-
-	//nothing to assign in this class
 	return *this;
 }
 
+/*Public function*/
 void Form::beSigned(Bureaucrat &signer)
 {
+	if (this->getSigned() == true)
+		throw(Form::IsSignedException());
 	if ((int)signer.getGrade() > this->getGradeToSign())
-		throw(Bureaucrat::GradeTooLowException());
-	else if (this->getSigned() == false)
-	{
-		this->_signed = true;
-		std::cout << this->getName() << " Form was signed by " << signer.getName() << std::endl;
-	}
-	else
-		std::cout << this->getName() << " Form is already signed" << std::endl;
+		throw(Form::GradeTooLowException());
+	this->_signed = true;
+	std::cout << GREEN << this->getName() << RESET << " Form was signed by " << YELLOW << signer.getName() << RESET << std::endl;
 }
 
-const std::string Form::getName()const
-{
+
+/*Getter*/
+const std::string Form::getName()const {
 	return (this->_name);
 }
 
-bool Form::getSigned()const
-{
+bool Form::getSigned()const {
 	return (this->_signed);
 }
 
-int	Form::getGradeToSign()const
-{
+int	Form::getGradeToSign()const {
 	return (this->_gradeToSign);
 }
 
-int	Form::getGradeToExecute()const
-{
+int	Form::getGradeToExecute()const {
 	return (this->_gradeToExecute);
 }
 
-/*ostream Overload*/
+/*exception*/
+const char *Form::GradeTooHighException::what() const throw() {
+	return "Form Expection: Grade too high";
+}
+
+const char *Form::GradeTooLowException::what() const throw() {
+	return "Form Expection: Grade too low";
+}
+
+const char *Form::NotSignedException::what() const throw() {
+	return "Form Expection: Form not signed";
+}
+
+const char *Form::IsSignedException::what() const throw() {
+	return "Form Expection: Form is signed";
+}
+
+/*Overload ostream*/
 std::ostream	&operator<<(std::ostream &o, Form *a)
 {
-	o << "Form " << YELLOW << a->getName() << RESET <<
-	":\n\tsign-grade:\t" << YELLOW << a->getGradeToSign() << RESET <<
-	"\n\texec-grade:\t" << YELLOW << a->getGradeToExecute() << RESET <<
-	"\n\tis signed:\t" << YELLOW << a->getSigned() << RESET <<
-	std::endl;
+	o << "Form " << GREEN << a->getName() << RESET <<
+	":\n\tsign-grade:\t" << CYAN << a->getGradeToSign() << RESET <<
+	"\n\texec-grade:\t" << CYAN << a->getGradeToExecute() << RESET <<
+	"\n\tis signed:\t" << CYAN << a->getSigned() << RESET << std::endl << std::endl;
 	return (o);
 }

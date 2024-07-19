@@ -1,18 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/19 05:11:01 by jo-tan            #+#    #+#             */
+/*   Updated: 2024/07/19 05:55:02 by jo-tan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 
 int main(void)
 {
 	{
-		std::cout << "\033[34mConstructing\033[0m" << std::endl;
+		std::cout << MAGENTA << "<< Default Test >>" << RESET << std::endl;
+		std::cout << GREY << "Constructing" << RESET << std::endl;
 		Bureaucrat *a = new Bureaucrat();
 		Form *b = new Form();
 		std::cout << std::endl;
 
-		std::cout << "\033[34mTesting\033[0m" << std::endl;
+		std::cout << GREY << "Check default setting" << RESET << std::endl;
 		std::cout << a;
 		std::cout << b;
 
+		std::cout << GREY << "Check besigned()" << RESET << std::endl;
 		try
 		{
 			b->beSigned(*a);
@@ -25,67 +39,88 @@ int main(void)
 		std::cout << b;
 		std::cout << std::endl;
 
-		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
+		std::cout << GREY << "Deconstructing" << RESET << std::endl;
 		delete a;
 		delete b;
 		std::cout << std::endl;
 	}
 	std::cout << "-------------------------------------------------------" << std::endl;
+	std::cout << MAGENTA << "<< Basic Function Test >>" << RESET << std::endl;
 	{
 		std::cout << std::endl;
 
-		std::cout << "\033[34mConstructing\033[0m" << std::endl;
+		std::cout << GREY << "Constructing" << RESET << std::endl;
 		Bureaucrat *a = new Bureaucrat("Assistant", 145);
-		Bureaucrat *b = new Bureaucrat("CEO", 1);
-		Form *c = new Form("Rent Contract", 140, 100);
+		Bureaucrat *b = new Bureaucrat("The BIG Boss", 1);
+		Form *c = new Form("New Office Contract", 50, 100);
 		std::cout << std::endl;
 
-		std::cout << "\033[34mTesting\033[0m" << std::endl;
+		std::cout << GREY << "Check setting" << RESET << std::endl;
 		std::cout << a;
 		std::cout << b;
 		std::cout << c;
 
-		// Assistant signs the Form
+		std::cout << GREY << a->getName() << " tried to signs the Form" << RESET << std::endl;
 		try
 		{
-			// c->beSigned(*a);
 			a->signForm(*c);
 		}
 		catch(Bureaucrat::GradeTooLowException &e)
 		{
-			std::cerr << "\033[33m" << a->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
+			std::cerr << GREY << a->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << GREY << std::endl;
 		}
 
-		// CEO signs the Form
+		std::cout << GREY << c->getName() << " signs the Form" << RESET << std::endl;
 		std::cout << c;
 		try
 		{
 			c->beSigned(*b);
-			// b->signForm(*c);
 		}
 		catch(Bureaucrat::GradeTooLowException &e)
 		{
-			std::cerr << "\033[33m" << b->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
+			std::cerr << GREY << b->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << RESET << std::endl;
 		}
 		std::cout << c;
 
-		// try signing the from again
+		std::cout << GREY << b->getName() << " try to signing the from again" << RESET << std::endl;
 		b->signForm(*c);
 		std::cout << std::endl;
 
-		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
+		std::cout << GREY << "Deconstructing" << RESET << std::endl;
 		delete a;
 		delete b;
 		delete c;
 		std::cout << std::endl;
 	}
 	std::cout << "-------------------------------------------------------" << std::endl;
+	std::cout << MAGENTA << "<< Exception Test >>" << RESET << std::endl;
 	{
 		std::cout << std::endl;
 
-		std::cout << "\033[34mConstructing\033[0m" << std::endl;
+		std::cout << GREY << "Constructing" << RESET << std::endl;
 		Form *a = NULL;
+		Bureaucrat *b = NULL;
 
+		// grade too low
+		try
+		{
+			b = new Bureaucrat(160);
+		}
+		catch (Bureaucrat::GradeTooLowException &e)
+		{
+			std::cerr << GREY << "Failed: " <<
+			e.what() << RESET << std::endl;
+		}
+		// grade too high
+		try
+		{
+			b = new Bureaucrat(-22);
+		}
+		catch (Bureaucrat::GradeTooHighException &e)
+		{
+			std::cerr << GREY << "Failed: " <<
+			e.what() << RESET << std::endl;
+		}
 		// sign-grade too high
 		try
 		{
@@ -93,8 +128,8 @@ int main(void)
 		}
 		catch (Form::GradeTooLowException &e)
 		{
-			std::cerr << "\033[33mConstructing default failed: " <<
-			e.what() << "\033[0m" << std::endl;
+			std::cerr << GREY << "Failed: " <<
+			e.what() << RESET << std::endl;
 		}
 
 		// exec-grade too high
@@ -104,8 +139,8 @@ int main(void)
 		}
 		catch (Form::GradeTooLowException &e)
 		{
-			std::cerr << "\033[33mConstructing default failed: " <<
-			e.what() << "\033[0m" << std::endl;
+			std::cerr << GREY << "Failed: " <<
+			e.what() << RESET  << std::endl;
 		}
 
 		// sign-grade too low
@@ -115,8 +150,8 @@ int main(void)
 		}
 		catch (Form::GradeTooHighException &e)
 		{
-			std::cerr << "\033[33mConstructing default failed: " <<
-			e.what() << "\033[0m" << std::endl;
+			std::cerr << GREY << "Failed: " <<
+			e.what() << RESET << std::endl;
 		}
 
 		// exec-grade too low
@@ -126,18 +161,19 @@ int main(void)
 		}
 		catch (Form::GradeTooHighException &e)
 		{
-			std::cerr << "\033[33mConstructing default failed: " <<
-			e.what() << "\033[0m" << std::endl;
+			std::cerr << GREY << "Failed: " <<
+			e.what() << RESET << std::endl;
 		}
 
 		// Deconstruction to prevent unused variable, in this case will never be called
 		if (a != NULL)
 		{
 			std::cout << std::endl;
-			std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
+			std::cout << GREY << "Deconstructing" << RESET << std::endl;
 			delete a;
+			delete b;
 		}
-		std::cout << std::endl;
+		std::cout << MAGENTA << "END OF TEST" << RESET << std::endl;
 	}
 	return (0);
 }

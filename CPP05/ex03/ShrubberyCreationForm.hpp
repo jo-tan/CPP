@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ShrubberyCreationAForm.hpp                         :+:      :+:    :+:   */
+/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 05:14:19 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/07/19 07:21:01 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/07/19 08:36:42 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,18 @@
 \n#########################################  \
 "
 
-class ShrubberyCreationAForm : public AForm {
+class ShrubberyCreationForm : public AForm {
 
 private:
     const std::string   _target;
-    ShrubberyCreationAForm();
+    ShrubberyCreationForm();
 
 public:
-    ShrubberyCreationAForm(const std::string &target);
-    ShrubberyCreationAForm(const ShrubberyCreationAForm &obj);
-    ~ShrubberyCreationAForm();
+    ShrubberyCreationForm(const std::string &target);
+    ShrubberyCreationForm(const ShrubberyCreationForm &obj);
+    ~ShrubberyCreationForm();
 
-    ShrubberyCreationAForm &operator=(ShrubberyCreationAForm &obj);
+    ShrubberyCreationForm &operator=(ShrubberyCreationForm &obj);
     
     std::string  getTarget()const;
 

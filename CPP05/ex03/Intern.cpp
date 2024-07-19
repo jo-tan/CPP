@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 05:16:45 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/07/19 07:57:43 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/07/19 08:38:13 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ Intern &Intern::operator=(const Intern &obj) {
     return (*this);
 }
 
-AForm   *Intern::createPresidentialPardonAForm(const std::string &target){
-    return new PresidentialPardonAForm(target);
+AForm   *Intern::createPresidentialPardonForm(const std::string &target){
+    return new PresidentialPardonForm(target);
 }
 
-AForm   *Intern::createRobotomyRequestAForm(const std::string &target){
-    return new RobotomyRequestAForm(target);
+AForm   *Intern::createRobotomyRequestForm(const std::string &target){
+    return new RobotomyRequestForm(target);
 }
 
-AForm   *Intern::createShrubberyCreationAForm(const std::string &target){
-    return new ShrubberyCreationAForm(target);
+AForm   *Intern::createShrubberyCreationForm(const std::string &target){
+    return new ShrubberyCreationForm(target);
 }
 
 
@@ -45,9 +45,9 @@ AForm   *Intern::makeForm(std::string name, const std::string &target) {
     }
     std::string formNames[3] = {"robotomy request", "presidential pardon", "shrubbery creation"};
     AForm  *(Intern::*formTable[3])(const std::string &target) = {
-        &Intern::createPresidentialPardonAForm,
-        &Intern::createRobotomyRequestAForm,
-        &Intern::createShrubberyCreationAForm
+        &Intern::createPresidentialPardonForm,
+        &Intern::createRobotomyRequestForm,
+        &Intern::createShrubberyCreationForm
     };
     for (int i(0); i < 3; i++) {
         if (name == formNames[i]) {
