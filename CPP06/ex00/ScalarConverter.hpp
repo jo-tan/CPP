@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/19 14:02:03 by jo-tan            #+#    #+#             */
+/*   Updated: 2024/07/19 14:02:05 by jo-tan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 Write a class ScalarConverter that will contain only one static methods "convert"
 that will takes as parameter a string representation of a C++ literal in its most common
 form and output its value in the following serie of scalar types :
