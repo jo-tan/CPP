@@ -6,26 +6,17 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 05:11:52 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/07/19 08:57:36 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/07/19 08:26:43 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 
-<<<<<<< HEAD
 Bureaucrat::Bureaucrat() : _name("default"), _grade(150) {
 	std::cout << GREY << "Bureaucrat: defualt contructor is called" << RESET << std::endl;
 	std::cout << "Bureaucrat Name: " << YELLOW << _name << RESET << " is created. Grade: ";
 	std::cout << YELLOW << _grade << RESET << std::endl;
-=======
-/* Constructors & Destructors */
-Bureaucrat::Bureaucrat(void): _name("unidentified") {
-	this->_grade = 150;
-	std::cout << YELLOW "[Bureaucrat] " RESET "New object called '" YELLOW << \
-		this->_name << RESET "' with grade " YELLOW << this->_grade << RESET \
-		"..." << std::endl;
->>>>>>> 37a2fdd9bf087d2d05d3537917363c1c3ffb6086
 }
 
 Bureaucrat::~Bureaucrat() {
@@ -78,21 +69,16 @@ void	Bureaucrat::setGrade(int grade) {
 		throw Bureaucrat::GradeTooHighException();
 	else if (grade > 150)
 		throw Bureaucrat::GradeTooLowException();
-	this->_grade = grade;
-	std::cout << YELLOW "[Bureaucrat] " RESET "New object called '" YELLOW << \
-		this->_name << RESET "' with grade " YELLOW << this->_grade << RESET \
-		"..." << std::endl;
+	else
+		this->_grade = grade;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &bureaucrat): _name(bureaucrat.getName()) {
-	*this = bureaucrat;
-	std::cout << YELLOW "[Bureaucrat] " RESET "Copied object called '" YELLOW << \
-		this->_name << RESET "'..." << std::endl;
+std::string Bureaucrat::getName() const {
+	return this->_name;
 }
 
-Bureaucrat::~Bureaucrat(void) {
-	std::cout << BRED "[Bureaucrat] " RESET "Deleting object called '" YELLOW << \
-		this->_name << RESET "'..." << std::endl;
+int	Bureaucrat::getGrade() const {
+	return this->_grade;
 }
 
 /*public function*/
@@ -100,45 +86,45 @@ void	Bureaucrat::Increment() {
 	std::cout << BLUE << "Increment function is called" << RESET << std::endl;
 	if (this->_grade - 1 < 1)
 		throw Bureaucrat::GradeTooHighException();
-	std::cout << YELLOW "[Bureaucrat] " RESET "Grade incrementation succeeded. " << \
-		"(from " YELLOW << oldGrade << RESET " to " YELLOW << this->_grade << RESET ")" << std::endl;
+	else
+		this->_grade -= 1;
+	std::cout << YELLOW << this->getName() << RESET << "'s new grade: " << YELLOW << this->getGrade() << RESET << std::endl;
 }
 
 void	Bureaucrat::Decrement() {
 	std::cout << BLUE << "Decrement function is called" << RESET << std::endl;
 	if (this->_grade + 1 > 150)
 		throw Bureaucrat::GradeTooLowException();
-	std::cout << YELLOW "[Bureaucrat] " RESET "Grade decrementation succeeded. " << \
-		"(from " YELLOW << oldGrade << RESET " to " YELLOW << this->_grade << RESET ")" << std::endl;
+	else
+		this->_grade += 1;
+	std::cout << YELLOW << this->getName() << RESET << "'s new grade: " << YELLOW << this->getGrade() << RESET << std::endl;
 }
 
-void	Bureaucrat::signForm(AForm &form) {
-	if (form.isSigned()) {
-		std::cout << YELLOW "[Bureaucrat] " YELLOW << this->_name << RESET " couldn't sign " << \
-			YELLOW << form.getName() << RESET " because it's already signed!" << std::endl;
-		return ;
+void	Bureaucrat::signForm(AForm &c) {
+	if (c.getSigned() == false && (c.getGradeToSign() > this->getGrade()))
+	{
+		c.beSigned(*this);
+		std::cout << YELLOW << this->getName() << RESET << " signed " <<
+		GREEN << c.getName() << RESET << std::endl;
 	}
-	try {
-		form.beSigned(*this);
-		std::cout << YELLOW "[Bureaucrat] " YELLOW << this->_name << RESET " signed " \
-			YELLOW << form.getName() << RESET "..." << std::endl;
-	} catch (std::exception &exception) {
-		std::cout << YELLOW "[Bureaucrat] " YELLOW << this->_name << RESET " couldn't sign " \
-			YELLOW << form.getName() << RESET " because '" << YELLOW << exception.what() << \
-			RESET << "'..." << std::endl;
+	else if (c.getGradeToSign() < this->getGrade())
+	{
+		std::cout << YELLOW << this->getName() << RESET << " couldn't signed " <<
+		GREEN << c.getName() << RESET << " because " <<
+		YELLOW << this->getName() << RESET << "'s permission level(" << this->getGrade() <<
+		") cannot sign " << GREEN << c.getName() << RESET <<
+		"(" << c.getGradeToExecute() << ")" << std::endl;
+	}
+	else
+	{
+		std::cout << YELLOW << this->getName() << RESET << " couldn't signed " <<
+		GREEN << c.getName() << RESET << " because this form is already signed" << std::endl;
 	}
 }
 
-void	Bureaucrat::executeForm(AForm const &form) {
-	try {
-		form.execute(*this);
-		std::cout << YELLOW "[Bureaucrat] " YELLOW << this->_name << RESET " executed " \
-			YELLOW << form.getName() << RESET "..." << std::endl;
-	} catch (std::exception &exception) {
-		std::cout << YELLOW "[Bureaucrat] " YELLOW << this->_name << RESET " couldn't execute " \
-			YELLOW << form.getName() << RESET " because '" << YELLOW << exception.what() << \
-			RESET << "'..." << std::endl;
-	}
+void	Bureaucrat::executeForm(AForm const &f) {
+		f.execute(*this);
+		std::cout << YELLOW << this->getName() << RESET << " execute " << f.getName() << std::endl;
 }
 
 /*Overload ostream*/
@@ -147,21 +133,4 @@ std::ostream	&operator<<(std::ostream &o, Bureaucrat *a)
 	o << "Bureaucrat " << YELLOW << a->getName() << RESET <<
 	":\n\tgrade: " << a->getGrade() << std::endl << std::endl;
 	return (o);
-}
-
-int	Bureaucrat::getGrade(void) const {
-	return (this->_grade);
-}
-
-/* Overloaded operators */
-Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &bureaucrat) {
-	if (this != &bureaucrat)
-		this->_grade = bureaucrat.getGrade();
-	return (*this);
-}
-
-std::ostream	&operator<<(std::ostream &out, const Bureaucrat &bureaucrat) {
-	out << YELLOW "[Bureaucrat] " YELLOW << bureaucrat.getName() << \
-		RESET ", bureaucrat grade " YELLOW << bureaucrat.getGrade() << RESET ".";
-	return (out);
 }
