@@ -22,3 +22,25 @@ Use serialize() on the address of the Data object and pass its return value to
 deserialize(). Then, ensure the return value of deserialize() compares equal to the
 original pointer.
 Do not forget to turn in the files of your Data structure.
+
+#include <stdint.h>
+
+class Data
+{
+	public:
+		int a;
+		float b;
+		char c;
+};
+
+class Serializer
+{
+	public:
+		Serializer();
+		~Serializer();
+		Serializer(const Serializer& other);
+		Serializer& operator=(const Serializer& other);
+
+		static  uintptr_t serialize(Data* ptr);
+		static Data* deserialize(uintptr_t raw);
+};

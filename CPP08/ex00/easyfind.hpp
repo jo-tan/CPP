@@ -17,3 +17,13 @@ You don’t have to handle associative containers.
 An associative container supports unique keys
 if it may contain at most one element for each key.
 Otherwise, it supports equivalent keys. 
+
+#ifndef EASYFIND_HPP
+# define EASYFIND_HPP
+
+template <typename T>
+typename T::iterator easyfind(T& container, int value);
+
+#include "easyfind.tpp"
+
+#endif
