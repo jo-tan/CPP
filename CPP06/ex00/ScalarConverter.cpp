@@ -6,16 +6,12 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 14:02:10 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/07/19 14:02:12 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/07/24 19:53:45 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "ScalarConverter.hpp"
-#include "cmath"
-#include <iostream>
-#include <iomanip>
-#include <cerrno>
 
 void ScalarConvert::convert(std::string const &literal)
 {
@@ -63,7 +59,7 @@ void ScalarConvert::handleNanPseudoLiteral(std::string const &literal)
 
 }
 
-bool ScalarConvert::checkTwoQuotes(const std::string &literal) {
+bool ScalarConvert::checkQuotePair(const std::string &literal) {
     int count = 0;
     for (size_t i = 0; i < literal.size(); ++i) {
         if (literal[i] == '\'') {
@@ -72,7 +68,6 @@ bool ScalarConvert::checkTwoQuotes(const std::string &literal) {
     }
     return count == 2;
 }
-#include <stdio.h>
 
 bool ScalarConvert::atLeastOneNum(std::string const &literal)
 {
@@ -109,7 +104,7 @@ bool ScalarConvert::validateInput(std::string const &literal)
 			 return false;
 		 if (literal[0] != '\'' || literal[literal.size() - 1] != '\'')
 			 return false;
-		 if (!checkTwoQuotes(literal))
+		 if (!checkQuotePair(literal))
 			 return false;
 	 }
 	 return true;
@@ -239,24 +234,24 @@ void ScalarConvert::printDouble(double d, std::string const &literal)
 }
 
 
-void printDoubleOverflow()
-{
-	std::cout << "double: impossible" << std::endl;
-}
-void printFloatOverflow()
-{
-	std::cout << "float: impossible" << std::endl;
-}
+// void printDoubleOverflow()
+// {
+// 	std::cout << "double: impossible" << std::endl;
+// }
+// void printFloatOverflow()
+// {
+// 	std::cout << "float: impossible" << std::endl;
+// }
 
-void printIntOverflow()
-{
-	std::cout << "int: impossible" << std::endl;
-}
+// void printIntOverflow()
+// {
+// 	std::cout << "int: impossible" << std::endl;
+// }
 
-void printCharOverflow()
-{
-	std::cout << "char: impossible" << std::endl;
-}
+// void printCharOverflow()
+// {
+// 	std::cout << "char: impossible" << std::endl;
+// }
 
 bool floatOverflow(double d)
 {

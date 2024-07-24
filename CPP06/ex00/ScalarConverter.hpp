@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 14:02:03 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/07/19 14:02:05 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/07/24 19:55:12 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,29 +53,20 @@ int: 42
 float: 42.0f
 double: 42.0
 
-
-#include <string>
 #include <iostream>
+#include <string>
 #include <cstdlib>
+#include "cmath"
 #include <limits>
 #include <sstream>
+#include <iomanip>
+#include <cerrno>
+#include <stdio.h>
 
 #ifndef SCALARCONVERTER_HPP
 # define SCALARCONVERTER_HPP
 
 class ScalarConvert {
-	public:
-		ScalarConvert();
-		static void convert(std::string const &input);
-
-		class NonDisplayableException : public std::exception {
-			public:
-				virtual const char* what() const throw();
-		};
-		class ImpossibleException : public std::exception {
-			public:
-				virtual const char* what() const throw();
-		};
 
 	private:
 		ScalarConvert(std::string str);
@@ -91,17 +82,33 @@ class ScalarConvert {
 		static int countDecimalPlaces(const std::string &s);
 		static bool validateInput(std::string const &literal);
 		static int getPrecision(std::string const &literal);
+		
 		static void printChar(double d);
 		static void printInt(double d);
 		static void printFloat(double d, std::string const &literal);
 		static void printDouble(double d, std::string const &literal);
-		static void printDoubleOverflow();
-		static void printIntOverflow();
-		static void printCharOverflow();
-		static void printFloatOverflow();
+		
+		// static void printDoubleOverflow();
+		// static void printIntOverflow();
+		// static void printCharOverflow();
+		// static void printFloatOverflow();
+		
 		static bool floatOverflow(double d);
-		static bool checkTwoQuotes(std::string const &literal);
+		static bool checkQuotePair(std::string const &literal);
 		static bool atLeastOneNum(std::string const &literal);
+	
+	public:
+		ScalarConvert();
+		static void convert(std::string const &input);
+
+		class NonDisplayableException : public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
+		class ImpossibleException : public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
 };
 
 
