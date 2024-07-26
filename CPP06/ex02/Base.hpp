@@ -6,44 +6,31 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 14:03:49 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/07/19 14:03:50 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/07/26 05:21:35 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-Implement a Base class that has a public virtual destructor only. Create three empty
-classes A, B and C, that publicly inherit from Base.
-
-
-Implement the following functions:
-Base * generate(void);
-It randomly instanciates A, B or C and returns the instance as a Base pointer. Feel free
-to use anything you like for the random choice implementation.
-void identify(Base* p);
-It prints the actual type of the object pointed to by p: "A", "B" or "C".
-void identify(Base& p);
-It prints the actual type of the object pointed to by p: "A", "B" or "C". Using a pointer
-inside this function is forbidden.
-Including the typeinfo header is forbidden.
-Write a program to test that everything works as expected.
-
-
-class Base{
-
-    public:
-        Base();
-        virtual ~Base();
-        Base * generate(void);
-        void identify(Base *p);
-        void identify(Base &p);
-};
-
+#ifndef BASE_HPP
+# define BASE_HPP
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <exception>
 
-class Base {
-public:
-    virtual ~Base() {}
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
+#define MAGENTA "\033[35m"
+#define CYAN    "\033[36m"
+#define WHITE   "\033[37m"
+#define GREY    "\033[38;5;241m"
+
+
+class Base{
+    public:
+        virtual ~Base();
 };
 
 class A : public Base {};
@@ -54,6 +41,8 @@ class C : public Base {};
 
 Base* generate(void);
 
-void identify(Base* p);
+void identify(Base *p);
 
-void identify(Base& p);
+void identify(Base &p);
+
+#endif

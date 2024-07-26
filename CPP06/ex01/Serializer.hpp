@@ -6,41 +6,45 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 14:02:55 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/07/19 14:02:57 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/07/26 03:31:15 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-Implement a class Serializer, who will not be initializable by the user by any way,
-with the following static methods:
-uintptr_t serialize(Data* ptr);
-It takes a pointer and converts it to the unsigned integer type uintptr_t.
-Data* deserialize(uintptr_t raw);
-It takes an unsigned integer parameter and converts it to a pointer to Data.
-Write a program to test that your class works as expected.
-You must create a non-empty (it means it has data members) Data structure.
-Use serialize() on the address of the Data object and pass its return value to
-deserialize(). Then, ensure the return value of deserialize() compares equal to the
-original pointer.
-Do not forget to turn in the files of your Data structure.
+#ifndef SERIALIZER_HPP
+# define SERIALIZER_HPP
 
 #include <stdint.h>
+#include <iostream>
+
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
+#define MAGENTA "\033[35m"
+#define CYAN    "\033[36m"
+#define WHITE   "\033[37m"
+#define GREY    "\033[38;5;241m"
 
 class Data
 {
 	public:
-		int a;
-		float b;
-		char c;
+		char a;
+		int b;
+		float c;
+		double d;
 };
 
 class Serializer
 {
-	public:
+	private:
 		Serializer();
 		~Serializer();
-		Serializer(const Serializer& other);
-		Serializer& operator=(const Serializer& other);
-
-		static  uintptr_t serialize(Data* ptr);
-		static Data* deserialize(uintptr_t raw);
+		Serializer(const Serializer &other);
+		Serializer &operator=(const Serializer &other);
+	public:
+		static  uintptr_t serialize(Data *ptr);
+		static Data *deserialize(uintptr_t raw);
 };
+
+#endif

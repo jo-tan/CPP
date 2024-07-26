@@ -6,11 +6,11 @@
 #    By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/17 08:54:04 by jo-tan            #+#    #+#              #
-#    Updated: 2024/07/24 19:56:11 by jo-tan           ###   ########.fr        #
+#    Updated: 2024/07/26 01:04:55 by jo-tan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ex00
+NAME = convert
 SRC = 	ScalarConverter.cpp \
 		main.cpp
 
