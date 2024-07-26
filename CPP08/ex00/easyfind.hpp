@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   easyfind.hpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/26 10:45:59 by jo-tan            #+#    #+#             */
+/*   Updated: 2024/07/26 10:46:01 by jo-tan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 ** A tpp file is typically used to denote that the source file contains implementations
 of templated methods (as opposed to putting the 
 implementation in the header file).

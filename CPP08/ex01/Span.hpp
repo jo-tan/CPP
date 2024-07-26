@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Span.hpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/26 10:47:06 by jo-tan            #+#    #+#             */
+/*   Updated: 2024/07/26 10:47:07 by jo-tan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 Develop a Span class that can store a maximum of N integers. N is an unsigned int
 variable and will be the only parameter passed to the constructor.
 This class will have a member function called addNumber() to add a single number

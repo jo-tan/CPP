@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   MutantStack.hpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/26 10:47:40 by jo-tan            #+#    #+#             */
+/*   Updated: 2024/07/26 10:47:42 by jo-tan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 Now, time to move on more serious things. Let’s develop something weird.
 The std::stack container is very nice. Unfortunately, it is one of the only STL Con-
 tainers that is NOT iterable. That’s too bad.
