@@ -75,7 +75,9 @@
         "numbers": "cpp",
         "ranges": "cpp",
         "span": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "csignal": "cpp",
+        "list": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
