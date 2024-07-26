@@ -6,17 +6,12 @@
 #    By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/17 08:54:04 by jo-tan            #+#    #+#              #
-#    Updated: 2024/02/17 08:56:46 by jo-tan           ###   ########.fr        #
+#    Updated: 2024/07/26 08:09:46 by jo-tan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ex00
-SRC = 	Animal.cpp \
-		Cat.cpp \
-		Dog.cpp \
-		WrongAnimal.cpp \
-		WrongCat.cpp \
-		main.cpp
+SRC = 	main.cpp
 
 O_DIR = obj
 OBJ = $(addprefix $(O_DIR)/, $(SRC:.cpp=.o))

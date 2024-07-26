@@ -1,49 +1,14 @@
-Implement the following function templates:
-• swap: Swaps the values of two given arguments. Does not return anything.
-• min: Compares the two values passed in its arguments and returns the smallest
-one. If the two of them are equal, then it returns the second one.
-• max: Compares the two values passed in its arguments and returns the greatest one.
-If the two of them are equal, then it returns the second one.
-These functions can be called with any type of argument. The only requirement is
-that the two arguments must have the same type and must support all the comparison
-operators.
-
-Running the following code:
-int main( void ) {
-    int a = 2;
-    int b = 3;
-    ::swap( a, b );
-    std::cout << "a = " << a << ", b = " << b << std::endl;
-    std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
-    std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl;
-    std::string c = "chaine1";
-    std::string d = "chaine2";
-    ::swap(c, d);
-    std::cout << "c = " << c << ", d = " << d << std::endl;
-    std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
-    std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
-    return 0;
-}
-
-
-Should output:
-a = 3, b = 2
-min(a, b) = 2
-max(a, b) = 3
-c = chaine2, d = chaine1
-min(c, d) = chaine1
-max(c, d) = chaine2
-
-void swap(arg1, arg2);
-someclass min(arg1, arg2);
-someclass max(arg1, arg2);
-
-someclass &operator=();
-
-someclass &operator+();
-someclass &operator-();
-someclass &operator*();
-someclass &operator/();
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/26 08:49:27 by jo-tan            #+#    #+#             */
+/*   Updated: 2024/07/26 08:51:41 by jo-tan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef WHATEVER_HPP
 # define WHATEVER_HPP
@@ -56,12 +21,12 @@ void swap(T& a, T& b) {
 }
 
 template <typename T>
-T min(const T& a, const T& b) {
+T min(const T &a, const T &b) {
     return (a < b) ? a : b;
 }
 
 template <typename T>
-T max(const T& a, const T& b) {
+T max(const T &a, const T &b) {
     return (a > b) ? a : b;
 }
 

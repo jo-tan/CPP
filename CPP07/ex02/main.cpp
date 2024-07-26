@@ -1,14 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/26 08:50:30 by jo-tan            #+#    #+#             */
+/*   Updated: 2024/07/26 08:52:26 by jo-tan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
 #include "Array.hpp"
 #include <cstdlib>
-
 
 #define MAX_VAL 750
 int main()
 {
     Array<int> arr(5); // Create an array of 5 integers
 
-    // Assign some values
+    std::cout << "\033[34mTest Int Array\033[0m" << std::endl;
     for (std::size_t i = 0; i < arr.size(); ++i)
     {
         arr[i] = i * 2;
@@ -25,17 +36,17 @@ int main()
     try
     {
         int value = arr[10]; // Attempt to access the 10th element
-        (void)value; // Remove unused variable warning
+        (void)value; // mute unused variable warning
     }
-    catch (const std::out_of_range& e)
+    catch (const std::exception &e)
     {
         std::cout << "Caught an out_of_range exception: " << e.what() << '\n';
     }
 
-     // Test with std::string
+    std::cout << "\033[34mTest String Array\033[0m" << std::endl;
     Array<std::string> strArray(3);
     strArray[0] = "Hello";
-    strArray[1] = "World";
+    strArray[1] = "good day";
     strArray[2] = "!";
     for (unsigned int i = 0; i < strArray.size(); ++i)
     {
@@ -47,7 +58,7 @@ int main()
     {
         std::cout << "Accessing out of range index: " << strArray[5] << std::endl;
     }
-    catch(const std::out_of_range& e)
+    catch(const std::exception& e)
     {
         std::cerr << "Caught exception: " << e.what() << '\n';
     }

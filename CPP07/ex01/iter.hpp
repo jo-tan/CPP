@@ -1,11 +1,14 @@
-Implement a function template iter that takes 3 parameters and returns nothing.
-• The first parameter is the address of an array.
-• The second one is the length of the array.
-• The third one is a function that will be call on every element of the array.
-Turn in a main.cpp file that contains your tests. Provide enough code to generate a
-test executable.
-Your iter function template must work with any type of array. The third parameter
-can be an instantiated function template.
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   iter.hpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/26 08:49:42 by jo-tan            #+#    #+#             */
+/*   Updated: 2024/07/26 08:51:38 by jo-tan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <iostream>
 
@@ -13,7 +16,7 @@ can be an instantiated function template.
 #define ITER_HPP
 
 template <typename T>
-void printElement(T const & element) {
+void printElement(T const &element) {
     std::cout << element << std::endl;
 }
 

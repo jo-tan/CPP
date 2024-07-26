@@ -1,45 +1,38 @@
-Develop a class template Array that contains elements of type T and that implements
-the following behavior and functions:
-• Construction with no parameter: Creates an empty array.
-• Construction with an unsigned int n as a parameter: Creates an array of n elements
-initialized by default.
-Tip: Try to compile int * a = new int(); then display *a.
-• Construction by copy and assignment operator. In both cases, modifying either the
-original array or its copy after copying musn’t affect the other array.
-• You MUST use the operator new[] to allocate memory. Preventive allocation (al-
-locating memory in advance) is forbidden. Your program must never access non-
-allocated memory.
-• Elements can be accessed through the subscript operator: [ ].
-• When accessing an element with the [ ] operator, if its index is out of bounds, an
-std::exception is thrown.
-• A member function size() that returns the number of elements in the array. This
-member function takes no parameter and musn’t modify the current instance.
-As usual, ensure everything works as expected and turn in a main.cpp file that con-
-tains your tests.
-
-template <typename T>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Array.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/26 08:50:05 by jo-tan            #+#    #+#             */
+/*   Updated: 2024/07/26 08:51:58 by jo-tan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef ARRAY_HPP
 #define ARRAY_HPP
 
+template <typename T>
 class Array
 {
 	private:
 		unsigned int _size;
-		T* _array;
+		T *_array;
 
 
 	public:
 		Array();
 		Array(unsigned int n);
-    Array(const Array& other);
+    Array(const Array &other);
     ~Array(); 
 
-    Array& operator=(const Array& other);
-    T& operator[](unsigned int index);
-    const T& operator[](unsigned int index) const;
+    Array &operator=(const Array &other);
+    T &operator[](unsigned int index);
+    const T &operator[](unsigned int index) const;
     size_t size() const;
 };
 
 #include "Array.tpp"
+
 #endif

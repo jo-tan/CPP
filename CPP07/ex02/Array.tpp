@@ -1,9 +1,19 @@
-// Array.tpp
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Array.tpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/26 08:50:05 by jo-tan            #+#    #+#             */
+/*   Updated: 2024/07/26 08:52:16 by jo-tan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "Array.hpp"
+
 template <typename T>
-Array<T>::Array()
-    : _size(0), _array(NULL)
-{
-}
+Array<T>::Array() : _size(0), _array(NULL) {}
 
 template <typename T>
 Array<T>::Array(unsigned int n)
@@ -30,7 +40,7 @@ Array<T>::~Array()
 }
 
 template <typename T>
-Array<T>& Array<T>::operator=(const Array<T>& other)
+Array<T> &Array<T>::operator=(const Array<T> &other)
 {
     if (this != &other)
     {
@@ -46,7 +56,7 @@ Array<T>& Array<T>::operator=(const Array<T>& other)
 }
 
 template <typename T>
-T& Array<T>::operator[](unsigned int index)
+T &Array<T>::operator[](unsigned int index)
 {
   if ( index >= _size )
     throw std::out_of_range("Index out of range");
@@ -55,7 +65,7 @@ T& Array<T>::operator[](unsigned int index)
 }
 
 template <typename T>
-const T& Array<T>::operator[](unsigned int index) const
+const T &Array<T>::operator[](unsigned int index) const
 {
   if ( index >= _size )
     throw std::out_of_range("Index out of range");
