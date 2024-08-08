@@ -6,12 +6,13 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 10:47:06 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/08/08 18:32:12 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/08/08 19:00:48 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SPAN_HPP
 # define SPAN_HPP
+#include <iostream>
 #include <vector>
 #include <algorithm>
 #include <climits>
@@ -34,6 +35,7 @@ class Span
     int shortestSpan();
     int longestSpan();
     int getNumber(int i) const;
+    void addRanRange(unsigned int n);
 
     template <typename Iterator>
     void addRange(Iterator begin, Iterator end)

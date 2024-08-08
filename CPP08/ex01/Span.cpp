@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 10:47:16 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/08/08 18:11:11 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/08/08 19:04:42 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,14 @@ int Span::getNumber(int i) const {
   }
   int res = *it;
   return res;
+}
+
+void Span::addRanRange(unsigned int n) {
+  if (_N < n )
+    throw std::length_error("Span is too short");
+  for (unsigned int i = 0; i < n; ++i)
+  {
+      _vec.push_back(i);
+  }
+  std::random_shuffle(_vec.begin(), _vec.end());
 }
