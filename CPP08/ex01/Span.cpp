@@ -6,33 +6,22 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 10:47:16 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/07/26 10:47:18 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/08/08 18:11:11 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "span.hpp"
+#include "Span.hpp"
 
 Span::Span() : _N(0) {}
 
 Span::Span(unsigned int N) : _N(N) {}
 
-Span::Span(const Span& other) : _N(other._N), _vec(other._vec)
-{
-}
+Span::Span(const Span &other) : _N(other._N), _vec(other._vec)
+{}
 
-Span::~Span()
-{
-}
+Span::~Span() {}
 
-void Span::addNumber(int number)
-{
-  if (_vec.size() < _N)
-    _vec.push_back(number);
-  else
-    throw std::length_error("Span is full");
-}
-
-Span& Span::operator=(const Span& other)
+Span &Span::operator=(const Span &other)
 {
   if (this != &other)
   {
@@ -42,6 +31,13 @@ Span& Span::operator=(const Span& other)
   return *this;
 }
 
+void Span::addNumber(int number)
+{
+  if (_vec.size() < _N)
+    _vec.push_back(number);
+  else
+    throw std::length_error("Span is full");
+}
 
 int Span::shortestSpan() {
   if (_vec.size() < 2)
@@ -64,4 +60,13 @@ int Span::longestSpan() {
   std::vector<int> tmp(_vec);
   std::sort(tmp.begin(), tmp.end());
   return *(tmp.end() - 1) - *tmp.begin();
+}
+
+int Span::getNumber(int i) const {
+  std::vector<int>::const_iterator it = _vec.begin();
+  for (int j = 0; j < i; ++j){
+    ++it;
+  }
+  int res = *it;
+  return res;
 }

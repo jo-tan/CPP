@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 10:46:47 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/07/26 10:46:49 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/08/08 16:39:04 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,18 @@ int main()
   std::list<int> lst(lst_array, lst_array + sizeof(lst_array) / sizeof(int));
     try
     {
+        /*run vector array*/
         std::cout << "Found " << *easyfind(vec, 3) << " in vector.\n";
+        std::cout << "Found " << *easyfind(vec, 1) << " in vector.\n";
+        std::cout << "Found " << *easyfind(vec, 5) << " in vector.\n";
+        
+        /*run lst array*/
+        std::cout << "Found " << *easyfind(lst, 7) << " in list.\n";
         std::cout << "Found " << *easyfind(lst, 8) << " in list.\n";
+        std::cout << "Found " << *easyfind(lst, 9) << " in list.\n";
+        
+        /*Exceptions*/
+        // std::cout << "Found " << *easyfind(lst, 4) << " in list.\n"; // This will throw an exception
         std::cout << "Found " << *easyfind(vec, 6) << " in vector.\n"; // This will throw an exception
     }
     catch (const std::runtime_error& e)
