@@ -1,4 +1,4 @@
-You must create a program with these constraints:
+/*You must create a program with these constraints:
 • The program name is RPN.
 • Your program must take an inverted Polish mathematical expression as an argu-
 ment.
@@ -28,4 +28,29 @@ $>
 
 Warning: The container(s) you used in the previous exercise are
 forbidden here. The container(s) you used to validate this exercise
-will not be usable for the rest of this module.
+will not be usable for the rest of this module.*/
+
+#ifndef RPN_HPP
+# define RPN_HPP
+
+# include <queue>
+# include <iotsream> 
+
+class RPN{
+
+    private:
+        const std::string _str;
+        std::queue<char> _input;
+        RPN();
+
+    public:
+        RPN(std::string &_str);
+        ~RPN();
+        RPN(const RPN &src);
+        RPN &operator=(const RPN &src);
+
+        int doMath(std::queue<char> _input);
+
+};
+
+#endif
