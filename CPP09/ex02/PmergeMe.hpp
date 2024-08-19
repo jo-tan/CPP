@@ -1,4 +1,4 @@
-You must create a program with these constraints:
+/*You must create a program with these constraints:
 • The name of the program is PmergeMe.
 • Your program must be able to use a positive integer sequence as argument.
 • Your program must use the merge-insert sort algorithm to sort the positive integer
@@ -61,4 +61,67 @@ Warning: The container(s) you used in the previous exercises are
 forbidden here.
 
 The management of errors related to duplicates is left to your
-discretion.
+discretion.*/
+
+#include <vector>
+#include <algorithm>
+#include <functional>
+
+class PmergeMe {
+private:
+    static const int INSERTION_SORT_THRESHOLD = 16;
+
+    template<typename T, typename Compare>
+    static void insertionSort(std::vector<T>& arr, int left, int right, Compare comp) {
+        for (int i = left + 1; i <= right; ++i) {
+            T key = arr[i];
+            int j = i - 1;
+            while (j >= left && comp(key, arr[j])) {
+                arr[j + 1] = arr[j];
+                --j;
+            }
+            arr[j + 1] = key;
+        }
+    }
+
+    template<typename T, typename Compare>
+    static void merge(std::vector<T> &arr, int left, int mid, int right, Compare comp) {
+        std::vector<T> temp(right - left + 1);
+        int i = left, j = mid + 1, k = 0;
+
+        while (i <= mid && j <= right) {
+            if (comp(arr[i], arr[j])) {
+                temp[k++] = arr[i++];
+            } else {
+                temp[k++] = arr[j++];
+            }
+        }
+
+        while (i <= mid) temp[k++] = arr[i++];
+        while (j <= right) temp[k++] = arr[j++];
+
+        for (int p = 0; p < k; ++p) {
+            arr[left + p] = temp[p];
+        }
+    }
+
+    template<typename T, typename Compare>
+    static void fordJohnsonSortHelper(std::vector<T> &arr, int left, int right, Compare comp) {
+        if (right - left + 1 <= INSERTION_SORT_THRESHOLD) {
+            insertionSort(arr, left, right, comp);
+            return;
+        }
+
+        int mid = left + (right - left) / 2;
+        fordJohnsonSortHelper(arr, left, mid, comp);
+        fordJohnsonSortHelper(arr, mid + 1, right, comp);
+
+        merge(arr, left, mid, right, comp);
+    }
+
+public:
+    template<typename T, typename Compare>
+    static void sort(std::vector<T> &arr, Compare comp) {
+        fordJohnsonSortHelper(arr, 0, arr.size() - 1, comp);
+    }
+};

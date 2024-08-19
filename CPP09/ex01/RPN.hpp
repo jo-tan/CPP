@@ -40,7 +40,7 @@ class RPN{
 
     private:
         const std::string _str;
-        std::queue<char> _input;
+        std::queue<int> _input;
         RPN();
 
     public:
@@ -49,7 +49,7 @@ class RPN{
         RPN(const RPN &src);
         RPN &operator=(const RPN &src);
 
-        int doMath(std::queue<char> _input);
+        int doMath(std::queue<int> _input);
 
 };
 
