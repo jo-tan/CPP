@@ -1,4 +1,16 @@
-You have to create a program which outputs the value of a certain amount of bitcoin
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/19 18:10:06 by jo-tan            #+#    #+#             */
+/*   Updated: 2024/08/19 18:10:19 by jo-tan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/*You have to create a program which outputs the value of a certain amount of bitcoin
 on a certain date.
 This program must use a database in csv format which will represent bitcoin price
 over time. This database is provided with this subject.
@@ -13,4 +25,4 @@ Your program must respect these rules:
 
 You must use at least one container in your code to validate this
 exercise. You should handle possible errors with an appropriate
-error message.
+error message.*/
