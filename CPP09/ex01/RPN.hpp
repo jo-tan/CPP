@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   RPN.hpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/19 18:11:26 by jo-tan            #+#    #+#             */
+/*   Updated: 2024/08/19 18:11:28 by jo-tan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /*You must create a program with these constraints:
 • The program name is RPN.
 • Your program must take an inverted Polish mathematical expression as an argu-
@@ -34,23 +46,29 @@ will not be usable for the rest of this module.*/
 # define RPN_HPP
 
 # include <queue>
-# include <iotsream> 
+# include <stack>
+# include <iostream>
+# include <string> 
+# include <stdexcept>
+# include <limits>
+# include <cstdlib>
 
 class RPN{
 
     private:
-        const std::string _str;
-        std::queue<int> _input;
+        std::string _str;
+        std::queue<std::string> _input;
         RPN();
-
+        void parsing(const std::string _str);
+        void AddOverflow(int a, int b);
+        void SubOverflow(int a, int b);
+        void MulOverflow(int a, int b);
     public:
-        RPN(std::string &_str);
+        RPN(const std::string &_str);
         ~RPN();
         RPN(const RPN &src);
         RPN &operator=(const RPN &src);
-
-        int doMath(std::queue<int> _input);
-
+        int doMath();
 };
 
 #endif
