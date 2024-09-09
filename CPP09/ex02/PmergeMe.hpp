@@ -125,3 +125,40 @@ public:
         fordJohnsonSortHelper(arr, 0, arr.size() - 1, comp);
     }
 };
+
+
+#include <iostream>
+#include <deque>
+#include <algorithm>
+#include <iterator>
+
+template <typename T>
+class PSort {
+public:
+    void sort(std::deque<T>& data) {
+        if (data.empty()) return;
+        quicksort(data, 0, data.size() - 1);
+    }
+
+private:
+    void quicksort(std::deque<T>& data, int left, int right) {
+        if (left < right) {
+            int pivotIndex = partition(data, left, right);
+            quicksort(data, left, pivotIndex - 1);
+            quicksort(data, pivotIndex + 1, right);
+        }
+    }
+
+    int partition(std::deque<T>& data, int left, int right) {
+        T pivot = data[right];
+        int i = left - 1;
+        for (int j = left; j < right; ++j) {
+            if (data[j] <= pivot) {
+                ++i;
+                std::swap(data[i], data[j]);
+            }
+        }
+        std::swap(data[i + 1], data[right]);
+        return i + 1;
+    }
+};
