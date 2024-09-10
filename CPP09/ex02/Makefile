@@ -6,13 +6,13 @@
 #    By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/17 08:54:04 by jo-tan            #+#    #+#              #
-#    Updated: 2024/08/19 15:08:41 by jo-tan           ###   ########.fr        #
+#    Updated: 2024/09/10 10:35:17 by jo-tan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = RPN
+NAME = PMergeMe
 SRC = main.cpp \
-		RPN.cpp
+		PMergeMe.cpp
 
 O_DIR = obj
 OBJ = $(addprefix $(O_DIR)/, $(SRC:.cpp=.o))
