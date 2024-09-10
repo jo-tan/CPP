@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:10:28 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/08/19 18:10:30 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/09/10 16:19:44 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ BitcoinExchange::BitcoinExchange()
     std::getline(file, line); // skip first line
     while (std::getline(file, line))
     {
-        size_t delim = line.find(',');
+        size_t delim = line.find('|');
 
         std::string date = trim(line.substr(0, delim));
         std::string value = trim(line.substr(delim + 1, line.length()));
@@ -47,26 +47,23 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
 
 BitcoinExchange::~BitcoinExchange() {}
 
-void BitcoinExchange::parse(const string &filename)
+void BitcoinExchange::parse(const char *filename)
 {
     std::ifstream   file(filename);
     std::string          line;
 
     if (!file.is_open()) {
-        std::cout << "Error: file does not exist" << std::endl;
-        exit(EXIT_FAILURE);
+        throw std::invalid_argument("Error: file does not exist");
     }
 
     if (file.peek() == std::ifstream::traits_type::eof()) {
-        std::cerr << "Error: file is empty" << std::endl;
-        exit(EXIT_FAILURE);
+        throw std::invalid_argument("Error: file is empty");
     }
 
     std::getline(file, line); // skip first line
 
-    if (line != "date | value") {
-        std::cerr << "Error: invalid file format" << std::endl;
-        exit(EXIT_FAILURE);
+    if (line != "date,exchange_rate") {
+        throw std::invalid_argument("Error: invalid file format");
     }
 
     while (std::getline(file, line))
@@ -90,12 +87,12 @@ void BitcoinExchange::parse(const string &filename)
 
             validateNumber(value);
 
-            std::map<string, string>::iterator it;
+            std::map<std::string, std::string>::iterator it;
             std::string prevDate = date;
             it = _data.find(date);
 
             while (it == _data.end()) {
-                const string& currentDate = prevDate;
+                const std::string& currentDate = prevDate;
                 prevDate = previousDate(currentDate);
                 it = _data.find(prevDate);
             }
@@ -117,7 +114,7 @@ bool BitcoinExchange::isLeapYear(int year)
     return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
 }
 
-int BitcoinExchange::ft_stoi(const string &str)
+int BitcoinExchange::ft_stoi(const std::string &str)
 {
     std::stringstream ss(str);
     int value;
@@ -127,7 +124,7 @@ int BitcoinExchange::ft_stoi(const string &str)
     return value;
 }
 
-double BitcoinExchange::ft_stod(const string &str)
+double BitcoinExchange::ft_stod(const std::string &str)
 {
     std::stringstream ss(str);
     double value;
@@ -146,7 +143,7 @@ std::string BitcoinExchange::ft_to_string(int value)
     return ss.str();
 }
 
-std::string BitcoinExchange::previousDate(const string& date) {
+std::string BitcoinExchange::previousDate(const std::string& date) {
     int year = ft_stoi(date.substr(0, 4));
     int month = ft_stoi(date.substr(5, 2));
     int day = ft_stoi(date.substr(8, 2));
@@ -191,34 +188,33 @@ std::string BitcoinExchange::trim(const std::string& str) {
     return str.substr(first, (last - first + 1));
 }
 
-bool BitcoinExchange::fileExists(const std::string &filename)
-{
-    std::fstream file(filename);
+// bool BitcoinExchange::fileExists(const std::string &filename)
+// {
+//     std::ifstream file(filename);
 
-    bool exists = file.good();
+//     bool exists = file.good();
 
-    file.close();
-    return exists;
-}
+//     file.close();
+//     return exists;
+// }
 
-bool BitcoinExchange::fileIsEmpty(const std::string &filename)
-{
-    std::ifstream file(filename);
+// bool BitcoinExchange::fileIsEmpty(const std::string &filename)
+// {
+//     std::ifstream file(filename);
 
-    bool isEmpty = file.peek() == std::ifstream::traits_type::eof();
+//     bool isEmpty = file.peek() == std::ifstream::traits_type::eof();
 
-    file.close();
-    return isEmpty;
-}
+//     file.close();
+//     return isEmpty;
+// }
 
 void BitcoinExchange::validateNumber(const std::string &str) {
     double value;
 
     try {
         // If there's more than one decimal point, throw an error
-        if (std::find(str.begin(), str.end(), '.') != str.end()) {
-            size_t decimalPoint = str.find('.');
-            if (std::find(str.begin() + decimalPoint + 1, str.end(), '.') != str.end())
+        if (size_t decimalPoint = str.find('.') != std::string::npos) {
+            if (size_t decimalErr = str.find('.', decimalPoint + 1) != std::string::npos)
                 throw std::invalid_argument("too many decimal points");
         }
 

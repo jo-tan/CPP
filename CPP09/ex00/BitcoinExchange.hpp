@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:10:06 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/09/10 10:30:25 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/09/10 11:18:44 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 #include <iostream>
 #include <map>
 #include <fstream>
+#include <string>
 #include <sstream>
-
-typedef std::string string;
 
 class BitcoinExchange
 {
@@ -45,5 +44,5 @@ public:
     BitcoinExchange &operator=(const BitcoinExchange &other);
     ~BitcoinExchange();
 
-    void parse(const std::string &filename);
+    void parse(const char *filename);
 };

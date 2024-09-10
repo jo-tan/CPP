@@ -6,11 +6,11 @@
 #    By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/17 08:54:04 by jo-tan            #+#    #+#              #
-#    Updated: 2024/08/19 18:11:02 by jo-tan           ###   ########.fr        #
+#    Updated: 2024/09/10 16:15:23 by jo-tan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = BitcoinExchange
+NAME = btc
 SRC = main.cpp \
 		BitcoinExchange.cpp
 
