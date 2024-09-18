@@ -77,7 +77,7 @@ int main(int argc, char* argv[]) {
                   << deque_time << " ms" << std::endl;
     }
     catch (const InputError& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
+        std::cerr << "\033[1;31mError\033[0m : " << e.what() << std::endl;
         return 1;
     }
     catch (const std::exception& e) {

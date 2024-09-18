@@ -26,16 +26,19 @@ class RPN{
     private:
         std::string _str;
         std::queue<std::string> _input;
+        
         RPN();
+        RPN(const RPN &src);
+        RPN &operator=(const RPN &src);
+        
         void parsing(const std::string _str);
         void AddOverflow(int a, int b);
         void SubOverflow(int a, int b);
         void MulOverflow(int a, int b);
+        
     public:
         RPN(const std::string &_str);
         ~RPN();
-        RPN(const RPN &src);
-        RPN &operator=(const RPN &src);
         int doMath();
 };
 

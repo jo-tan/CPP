@@ -51,7 +51,9 @@ void RPN::parsing(const std::string _str){
             std::string op(1, ch);
             _input.push(op);
         } else if (ch != ' '){
-            throw std::runtime_error("Error: Invalid character in input");
+            std::string badToken;
+            badToken = ch;
+            throw std::runtime_error("Invalid character in input: " + badToken);
         }
     }
     if (!number.empty()){
@@ -62,20 +64,20 @@ void RPN::parsing(const std::string _str){
 void RPN::AddOverflow(int a, int b){
     if ((b > 0 && a > std::numeric_limits<int>::max() - b) || 
     (b < 0 && a < std::numeric_limits<int>::min() - b)){
-        throw std::runtime_error("Error: Integer overflow (Add)");
+        throw std::runtime_error("Integer overflow (Add)");
     }
 }
 
 void RPN::SubOverflow(int a, int b){
     if ((b > 0 && a < std::numeric_limits<int>::max() + b) || 
     (b < 0 && a > std::numeric_limits<int>::min() + b)){
-        throw std::runtime_error("Error: Integer overflow (Sub)");
+        throw std::runtime_error("Integer overflow (Sub)");
     }
 }
 
 void RPN::MulOverflow(int a, int b){
     if (a != 0 && (b > std::numeric_limits<int>::max() / a || b < std::numeric_limits<int>::min() / a)){
-        throw std::runtime_error("Error: Integer overflow (Mul)");
+        throw std::runtime_error("Integer overflow (Mul)");
     }
 }
 
@@ -89,7 +91,7 @@ int RPN::doMath(){
 
         if (token.size() == 1 && (token[0] == '+' || token[0] == '-' || token[0] == '*' || token[0] == '/')){
             if (stack.size() < 2){
-                throw std::runtime_error("Error: Invalid RPN expression");
+                throw std::runtime_error("Invalid RPN expression");
             }
             int b = stack.top();
             stack.pop();
@@ -112,12 +114,12 @@ int RPN::doMath(){
                     break;
                 case '/':
                     if (b == 0){
-                        throw std::runtime_error("Error: Division by zero");
+                        throw std::runtime_error("Division by zero");
                     }
                     result = a / b;
                     break;
                 default:
-                    throw std::runtime_error("Error: Invalid Operator");
+                    throw std::runtime_error("Invalid Operator");
             }
 
             stack.push(result);
@@ -128,7 +130,7 @@ int RPN::doMath(){
         }
     }
     if (stack.size() != 1)
-        throw std::runtime_error("Error: Invalid RPN expression");
+        throw std::runtime_error("Invalid RPN expression");
     
     return stack.top();
 }

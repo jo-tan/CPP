@@ -18,7 +18,7 @@ int main(int argc, char *argv[]){
             RPN input(argv[1]);
             std::cout << input.doMath() << std::endl;
         } catch (const std::exception &e){
-            std::cout << e.what() << std::endl;
+            std::cerr << "\033[1;31mError\033[0m: " << e.what() << std::endl;
             return (1);
         }
     } else {

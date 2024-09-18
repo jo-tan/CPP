@@ -10,13 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "PmergeMe.hpp"
 
-unsigned int PmergeMe::jacobsthal(unsigned int n) {
-    if (n == 0) return 0;
-    if (n == 1) return 1;
-    return jacobsthal(n - 1) + 2 * jacobsthal(n - 2);
+PmergeMe::PmergeMe(){}
+PmergeMe::~PmergeMe(){}
+
+PmergeMe::PmergeMe(const PmergeMe& src){
+    (void) src;
+}
+
+PmergeMe& PmergeMe::operator=(const PmergeMe& src){
+    (void) src;
+    return *this;
 }
 
 // Vector implementation
@@ -205,6 +210,12 @@ void PmergeMe::mergeInsertionSortDeque(std::deque<int>& container, std::deque<in
 
     // For small partitions, use insertion sort
     insertionSortDeque(begin, end);
+}
+
+unsigned int PmergeMe::jacobsthal(unsigned int n) {
+    if (n == 0) return 0;
+    if (n == 1) return 1;
+    return jacobsthal(n - 1) + 2 * jacobsthal(n - 2);
 }
 
 double measureSortingTimeVector(std::vector<int>& container) {
