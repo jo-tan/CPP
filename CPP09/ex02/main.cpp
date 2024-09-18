@@ -59,8 +59,6 @@ int main(int argc, char* argv[]) {
         }
         std::cout << std::endl;
 
-        std::vector<int> vec_copy = vec;
-        std::deque<int> deq_copy = deq;
 
         double vector_time = measureSortingTimeVector(vec);
         double deque_time = measureSortingTimeDeque(deq);
