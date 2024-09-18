@@ -26,15 +26,15 @@ int validateAndConvert(const std::string& input) {
     long long num;
     
     if (!(iss >> num) || !iss.eof()) {
-        throw InputError("not a valid number");
+        throw InputError("not a valid number: " + input);
     }
     
     if (num < 0) {
-        throw InputError("negative number");
+        throw InputError("negative number: " + input);
     }
     
     if (num > INT_MAX) {
-        throw InputError("number too large");
+        throw InputError("number too large: " + input);
     }
     
     return static_cast<int>(num);
@@ -50,15 +50,16 @@ int main(int argc, char* argv[]) {
     std::deque<int> deq;
 
     try {
-        std::cout << "Before: ";
         for (int i = 1; i < argc; ++i) {
             int num = validateAndConvert(argv[i]);
             vec.push_back(num);
             deq.push_back(num);
-            std::cout << num << " ";
+        }
+        std::cout << "Before: ";
+        for (size_t i = 0; i < vec.size(); ++i){
+            std::cout << vec[i] << " ";
         }
         std::cout << std::endl;
-
 
         double vector_time = measureSortingTimeVector(vec);
         double deque_time = measureSortingTimeDeque(deq);
@@ -72,7 +73,7 @@ int main(int argc, char* argv[]) {
         std::cout << std::fixed << std::setprecision(5);
         std::cout << "Time to process a range of " << vec.size() << " elements with std::vector : " 
                   << vector_time << " ms" << std::endl;
-        std::cout << "Time to process a range of " << deq.size() << " elements with std::deque : " 
+        std::cout << "Time to process a range of " << deq.size() << " elements with std::deque  : " 
                   << deque_time << " ms" << std::endl;
     }
     catch (const InputError& e) {

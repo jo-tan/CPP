@@ -53,8 +53,7 @@ void PmergeMe::insertionSortVector(std::vector<int>::iterator begin, std::vector
         std::vector<int>::iterator j = i - 1;
         while (j >= begin && *j > key) {
             *(j + 1) = *j;
-            if (j == begin) break;
-        --j;
+            --j;
         }
         *(j + 1) = key;
     }
@@ -93,15 +92,25 @@ void PmergeMe::mergeVector(std::vector<int>::iterator begin, std::vector<int>::i
 void PmergeMe::mergeInsertionSortVector(std::vector<int>& container, std::vector<int>::iterator begin, std::vector<int>::iterator end) {
     if (end - begin <= 1) return;
 
-    std::vector<int>::iterator mid = begin + (end - begin) / 2;
-    mergeInsertionSortVector(container, begin, mid);
-    mergeInsertionSortVector(container, mid, end);
+    while (end - begin > 16) { // Use while-loop instead of recursion for large partitions
+        std::vector<int>::iterator mid = begin + (end - begin) / 2;
 
-    if (end - begin <= 16) {
-        insertionSortVector(begin, end);
-    } else {
-        mergeVector(begin, mid, end);
+        // Recursively sort the smaller partition, iteratively sort the larger partition
+        if (mid - begin > end - mid) {
+            // Sort the right half recursively
+            mergeInsertionSortVector(container, mid, end);
+            // Iteratively sort the left half
+            end = mid;
+        } else {
+            // Sort the left half recursively
+            mergeInsertionSortVector(container, begin, mid);
+            // Iteratively sort the right half
+            begin = mid;
+        }
     }
+
+    // For small partitions, use insertion sort
+    insertionSortVector(begin, end);
 }
 
 // Deque implementation
@@ -138,9 +147,8 @@ void PmergeMe::insertionSortDeque(std::deque<int>::iterator begin, std::deque<in
         std::deque<int>::iterator j = i - 1;
         while (j >= begin && *j > key) {
             *(j + 1) = *j;
-            if (j == begin) break;
             --j;
-    }
+        }
         *(j + 1) = key;
     }
 }
@@ -178,15 +186,25 @@ void PmergeMe::mergeDeque(std::deque<int>::iterator begin, std::deque<int>::iter
 void PmergeMe::mergeInsertionSortDeque(std::deque<int>& container, std::deque<int>::iterator begin, std::deque<int>::iterator end) {
     if (end - begin <= 1) return;
 
-    std::deque<int>::iterator mid = begin + (end - begin) / 2;
-    mergeInsertionSortDeque(container, begin, mid);
-    mergeInsertionSortDeque(container, mid, end);
+    while (end - begin > 16) { // Use while-loop instead of recursion for large partitions
+        std::deque<int>::iterator mid = begin + (end - begin) / 2;
 
-    if (end - begin <= 16) {
-        insertionSortDeque(begin, end);
-    } else {
-        mergeDeque(begin, mid, end);
+        // Recursively sort the smaller partition, iteratively sort the larger partition
+        if (mid - begin > end - mid) {
+            // Sort the right half recursively
+            mergeInsertionSortDeque(container, mid, end);
+            // Iteratively sort the left half
+            end = mid;
+        } else {
+            // Sort the left half recursively
+            mergeInsertionSortDeque(container, begin, mid);
+            // Iteratively sort the right half
+            begin = mid;
+        }
     }
+
+    // For small partitions, use insertion sort
+    insertionSortDeque(begin, end);
 }
 
 double measureSortingTimeVector(std::vector<int>& container) {
