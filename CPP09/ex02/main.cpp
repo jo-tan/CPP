@@ -18,6 +18,10 @@ public:
 };
 
 int validateAndConvert(const std::string& input) {
+
+    if (input.empty()){
+        throw InputError("no data set");
+    }
     std::istringstream iss(input);
     long long num;
     

@@ -21,7 +21,7 @@
 #include <stdexcept>
 #include <climits>
 #include <ctime>
-#include <iomapip>
+#include <iomanip>
 
 
 class PmergeMe {
@@ -30,12 +30,12 @@ public:
     static void sortDeque(std::deque<int>& container);
 
 private:
-    static void insertionSortVector(std::vector<int>& container, std::vector<int>::iterator begin, std::vector<int>::iterator end);
-    static void mergeVector(std::vector<int>& container, std::vector<int>::iterator begin, std::vector<int>::iterator mid, std::vector<int>::iterator end);
+    static void insertionSortVector(std::vector<int>::iterator begin, std::vector<int>::iterator end);
+    static void mergeVector(std::vector<int>::iterator begin, std::vector<int>::iterator mid, std::vector<int>::iterator end);
     static void mergeInsertionSortVector(std::vector<int>& container, std::vector<int>::iterator begin, std::vector<int>::iterator end);
 
-    static void insertionSortDeque(std::deque<int>& container, std::deque<int>::iterator begin, std::deque<int>::iterator end);
-    static void mergeDeque(std::deque<int>& container, std::deque<int>::iterator begin, std::deque<int>::iterator mid, std::deque<int>::iterator end);
+    static void insertionSortDeque(std::deque<int>::iterator begin, std::deque<int>::iterator end);
+    static void mergeDeque(std::deque<int>::iterator begin, std::deque<int>::iterator mid, std::deque<int>::iterator end);
     static void mergeInsertionSortDeque(std::deque<int>& container, std::deque<int>::iterator begin, std::deque<int>::iterator end);
 
     static unsigned int jacobsthal(unsigned int n);

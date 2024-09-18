@@ -47,19 +47,20 @@ void PmergeMe::sortVector(std::vector<int>& container) {
     }
 }
 
-void PmergeMe::insertionSortVector(std::vector<int>& container, std::vector<int>::iterator begin, std::vector<int>::iterator end) {
+void PmergeMe::insertionSortVector(std::vector<int>::iterator begin, std::vector<int>::iterator end) {
     for (std::vector<int>::iterator i = begin + 1; i != end; ++i) {
         int key = *i;
         std::vector<int>::iterator j = i - 1;
         while (j >= begin && *j > key) {
             *(j + 1) = *j;
-            --j;
+            if (j == begin) break;
+        --j;
         }
         *(j + 1) = key;
     }
 }
 
-void PmergeMe::mergeVector(std::vector<int>& container, std::vector<int>::iterator begin, std::vector<int>::iterator mid, std::vector<int>::iterator end) {
+void PmergeMe::mergeVector(std::vector<int>::iterator begin, std::vector<int>::iterator mid, std::vector<int>::iterator end) {
     std::vector<int> temp(begin, end);
     std::vector<int>::iterator left = temp.begin();
     std::vector<int>::iterator right = left + (mid - begin);
@@ -97,9 +98,9 @@ void PmergeMe::mergeInsertionSortVector(std::vector<int>& container, std::vector
     mergeInsertionSortVector(container, mid, end);
 
     if (end - begin <= 16) {
-        insertionSortVector(container, begin, end);
+        insertionSortVector(begin, end);
     } else {
-        mergeVector(container, begin, mid, end);
+        mergeVector(begin, mid, end);
     }
 }
 
@@ -131,19 +132,20 @@ void PmergeMe::sortDeque(std::deque<int>& container) {
     }
 }
 
-void PmergeMe::insertionSortDeque(std::deque<int>& container, std::deque<int>::iterator begin, std::deque<int>::iterator end) {
+void PmergeMe::insertionSortDeque(std::deque<int>::iterator begin, std::deque<int>::iterator end) {
     for (std::deque<int>::iterator i = begin + 1; i != end; ++i) {
         int key = *i;
         std::deque<int>::iterator j = i - 1;
         while (j >= begin && *j > key) {
             *(j + 1) = *j;
+            if (j == begin) break;
             --j;
-        }
+    }
         *(j + 1) = key;
     }
 }
 
-void PmergeMe::mergeDeque(std::deque<int>& container, std::deque<int>::iterator begin, std::deque<int>::iterator mid, std::deque<int>::iterator end) {
+void PmergeMe::mergeDeque(std::deque<int>::iterator begin, std::deque<int>::iterator mid, std::deque<int>::iterator end) {
     std::deque<int> temp(begin, end);
     std::deque<int>::iterator left = temp.begin();
     std::deque<int>::iterator right = left + (mid - begin);
@@ -181,9 +183,9 @@ void PmergeMe::mergeInsertionSortDeque(std::deque<int>& container, std::deque<in
     mergeInsertionSortDeque(container, mid, end);
 
     if (end - begin <= 16) {
-        insertionSortDeque(container, begin, end);
+        insertionSortDeque(begin, end);
     } else {
-        mergeDeque(container, begin, mid, end);
+        mergeDeque(begin, mid, end);
     }
 }
 

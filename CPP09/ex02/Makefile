@@ -10,9 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = PMergeMe
+NAME = PmergeMe
 SRC = main.cpp \
-		PMergeMe.cpp
+		PmergeMe.cpp
 
 O_DIR = obj
 OBJ = $(addprefix $(O_DIR)/, $(SRC:.cpp=.o))
