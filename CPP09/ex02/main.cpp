@@ -64,9 +64,15 @@ int main(int argc, char* argv[]) {
         double vector_time = measureSortingTimeVector(vec);
         double deque_time = measureSortingTimeDeque(deq);
 
-        std::cout << "After: ";
+        std::cout << "\033[1;34mAfter\033[0m\n";
+        std::cout << "\033[33mVEC\033[0m: ";
         for (size_t i = 0; i < vec.size(); ++i) {
             std::cout << vec[i] << " ";
+        }
+        std::cout << std::endl;
+        std::cout << "\033[35mDEQ\033[0m: ";
+        for (size_t i = 0; i < vec.size(); ++i) {
+            std::cout << deq[i] << " ";
         }
         std::cout << std::endl;
 

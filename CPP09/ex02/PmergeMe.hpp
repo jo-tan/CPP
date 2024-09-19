@@ -32,18 +32,18 @@ class PmergeMe {
         PmergeMe(const PmergeMe& src);
         PmergeMe& operator=(const PmergeMe& src);
 
-        static void insertionSortVector(std::vector<int>::iterator begin, std::vector<int>::iterator end);
-        static void mergeVector(std::vector<int>::iterator begin, std::vector<int>::iterator mid, std::vector<int>::iterator end);
-        static void mergeInsertionSortVector(std::vector<int>& container, std::vector<int>::iterator begin, std::vector<int>::iterator end);
+        static void sortPairs(std::vector<std::pair<int, int> >& pairs);
+        static void insertRemaining(std::vector<int>& sorted, const std::vector<std::pair<int, int> >& pairs);
+        static void binaryInsert(std::vector<int>& sorted, int value, int left, int right);
+        static std::vector<int> generateInsertionSequence(int n);
 
-        static void insertionSortDeque(std::deque<int>::iterator begin, std::deque<int>::iterator end);
-        static void mergeDeque(std::deque<int>::iterator begin, std::deque<int>::iterator mid, std::deque<int>::iterator end);
-        static void mergeInsertionSortDeque(std::deque<int>& container, std::deque<int>::iterator begin, std::deque<int>::iterator end);
-
-        static unsigned int jacobsthal(unsigned int n);
+        static void sortPairsDeq(std::deque<std::pair<int, int> >& pairs);
+        static void insertRemainingDeq(std::deque<int>& sorted, const std::deque<std::pair<int, int> >& pairs);
+        static void binaryInsertDeq(std::deque<int>& sorted, int value, int left, int right);
+        static std::deque<int> generateInsertionSequenceDeq(int n);
 
     public:
-        static void sortVector(std::vector<int>& container);
+        static void sortVector(std::vector<int>& arr);
         static void sortDeque(std::deque<int>& container);
 
 };

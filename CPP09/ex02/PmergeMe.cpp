@@ -25,198 +25,217 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& src){
 }
 
 // Vector implementation
-void PmergeMe::sortVector(std::vector<int>& container) {
-    mergeInsertionSortVector(container, container.begin(), container.end());
+void PmergeMe::sortVector(std::vector<int>& arr) {
+    if (arr.size() <= 1) return;
 
-    size_t n = container.size();
-    unsigned int jacobsthalIdx = 3;
-    size_t prev = 1;
-    size_t curr = 3;
-
-    while (curr < n) {
-        for (size_t i = prev; i < curr && i + curr < n; ++i) {
-            std::vector<int>::iterator pos = std::lower_bound(container.begin(), container.begin() + curr, container[i + curr]);
-            int value = container[i + curr];
-            container.erase(container.begin() + i + curr);
-            container.insert(pos, value);
-        }
-        prev = curr;
-        curr = jacobsthal(++jacobsthalIdx);
-    }
-
-    for (size_t i = prev; i < n - 1; ++i) {
-        std::vector<int>::iterator pos = std::lower_bound(container.begin(), container.begin() + i + 1, container[i + 1]);
-        int value = container[i + 1];
-        container.erase(container.begin() + i + 1);
-        container.insert(pos, value);
-    }
-}
-
-void PmergeMe::insertionSortVector(std::vector<int>::iterator begin, std::vector<int>::iterator end) {
-    for (std::vector<int>::iterator i = begin + 1; i != end; ++i) {
-        int key = *i;
-        std::vector<int>::iterator j = i - 1;
-        while (j >= begin && *j > key) {
-            *(j + 1) = *j;
-            --j;
-        }
-        *(j + 1) = key;
-    }
-}
-
-void PmergeMe::mergeVector(std::vector<int>::iterator begin, std::vector<int>::iterator mid, std::vector<int>::iterator end) {
-    std::vector<int> temp(begin, end);
-    std::vector<int>::iterator left = temp.begin();
-    std::vector<int>::iterator right = left + (mid - begin);
-    std::vector<int>::iterator target = begin;
-
-    while (left < right && right < temp.end()) {
-        if (*left <= *right) {
-            *target = *left;
-            ++left;
+    // Step 1: Group elements into pairs
+    std::vector<std::pair<int, int> > pairs;
+    for (size_t i = 0; i < arr.size() - 1; i += 2) {
+        if (arr[i] > arr[i + 1]) {
+            pairs.push_back(std::make_pair(arr[i + 1], arr[i]));
         } else {
-            *target = *right;
-            ++right;
+            pairs.push_back(std::make_pair(arr[i], arr[i + 1]));
         }
-        ++target;
     }
 
-    while (left < right) {
-        *target = *left;
-        ++left;
-        ++target;
+    // Handle odd-length input
+    int extraElement = -1;
+    if (arr.size() % 2 != 0) {
+        extraElement = arr.back();
     }
 
-    while (right < temp.end()) {
-        *target = *right;
-        ++right;
-        ++target;
+    // Step 2 & 3: Sort the pairs based on their larger elements
+    sortPairs(pairs);
+
+    // Step 4: Create the sorted sequence S with the larger elements
+    std::vector<int> sorted;
+    for (size_t i = 0; i < pairs.size(); ++i) {
+        sorted.push_back(pairs[i].second);
+    }
+
+    // Insert the element paired with the smallest element of S
+    sorted.insert(sorted.begin(), pairs[0].first);
+
+    // Step 5: Insert remaining elements
+    insertRemaining(sorted, pairs);
+
+    // Handle odd-length input
+    if (extraElement != -1) {
+        binaryInsert(sorted, extraElement, 0, sorted.size() - 1);
+    }
+
+    // Copy sorted result back to input array
+    arr = sorted;
+}
+
+struct ComparePairs {
+    bool operator()(const std::pair<int, int>& a, const std::pair<int, int>& b) const {
+        return a.second < b.second;
+    }
+};
+
+void PmergeMe::sortPairs(std::vector<std::pair<int, int> >& pairs) {
+    if (pairs.size() <= 1) return;
+
+    size_t mid = pairs.size() / 2;
+    std::vector<std::pair<int, int> > left(pairs.begin(), pairs.begin() + mid);
+    std::vector<std::pair<int, int> > right(pairs.begin() + mid, pairs.end());
+
+    sortPairs(left);
+    sortPairs(right);
+
+    std::vector<std::pair<int, int> > merged;
+    merged.reserve(pairs.size());
+    std::merge(left.begin(), left.end(), right.begin(), right.end(), 
+               std::back_inserter(merged), ComparePairs());
+
+    pairs = merged;
+}
+
+void PmergeMe::insertRemaining(std::vector<int>& sorted, const std::vector<std::pair<int, int> >& pairs) {
+    std::vector<int> insertionSequence = generateInsertionSequence(pairs.size() - 1);
+    
+    for (size_t i = 0; i < insertionSequence.size(); ++i) {
+        int index = insertionSequence[i];
+        if (index < static_cast<int>(pairs.size())) {
+            binaryInsert(sorted, pairs[index].first, 0, sorted.size() - 1);
+        }
     }
 }
 
-void PmergeMe::mergeInsertionSortVector(std::vector<int>& container, std::vector<int>::iterator begin, std::vector<int>::iterator end) {
-    if (end - begin <= 1) return;
-
-    while (end - begin > 16) { // Use while-loop instead of recursion for large partitions
-        std::vector<int>::iterator mid = begin + (end - begin) / 2;
-
-        // Recursively sort the smaller partition, iteratively sort the larger partition
-        if (mid - begin > end - mid) {
-            // Sort the right half recursively
-            mergeInsertionSortVector(container, mid, end);
-            // Iteratively sort the left half
-            end = mid;
+void PmergeMe::binaryInsert(std::vector<int>& sorted, int value, int left, int right) {
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (sorted[mid] == value) {
+            sorted.insert(sorted.begin() + mid, value);
+            return;
+        } else if (sorted[mid] > value) {
+            right = mid - 1;
         } else {
-            // Sort the left half recursively
-            mergeInsertionSortVector(container, begin, mid);
-            // Iteratively sort the right half
-            begin = mid;
+            left = mid + 1;
         }
     }
+    sorted.insert(sorted.begin() + left, value);
+}
 
-    // For small partitions, use insertion sort
-    insertionSortVector(begin, end);
+std::vector<int> PmergeMe::generateInsertionSequence(int n) {
+    std::vector<int> sequence;
+    int power = 2;
+    int lastGroupStart = 1;
+
+    while (lastGroupStart <= n) {
+        for (int i = lastGroupStart; i < lastGroupStart + power / 2 && i <= n; ++i) {
+            sequence.push_back(i);
+        }
+        lastGroupStart += power / 2;
+        power *= 2;
+    }
+
+    return sequence;
 }
 
 // Deque implementation
-void PmergeMe::sortDeque(std::deque<int>& container) {
-    mergeInsertionSortDeque(container, container.begin(), container.end());
+void PmergeMe::sortDeque(std::deque<int>& arr) {
+    if (arr.size() <= 1) return;
 
-    size_t n = container.size();
-    unsigned int jacobsthalIdx = 3;
-    size_t prev = 1;
-    size_t curr = 3;
-
-    while (curr < n) {
-        for (size_t i = prev; i < curr && i + curr < n; ++i) {
-            std::deque<int>::iterator pos = std::lower_bound(container.begin(), container.begin() + curr, container[i + curr]);
-            int value = container[i + curr];
-            container.erase(container.begin() + i + curr);
-            container.insert(pos, value);
-        }
-        prev = curr;
-        curr = jacobsthal(++jacobsthalIdx);
-    }
-
-    for (size_t i = prev; i < n - 1; ++i) {
-        std::deque<int>::iterator pos = std::lower_bound(container.begin(), container.begin() + i + 1, container[i + 1]);
-        int value = container[i + 1];
-        container.erase(container.begin() + i + 1);
-        container.insert(pos, value);
-    }
-}
-
-void PmergeMe::insertionSortDeque(std::deque<int>::iterator begin, std::deque<int>::iterator end) {
-    for (std::deque<int>::iterator i = begin + 1; i != end; ++i) {
-        int key = *i;
-        std::deque<int>::iterator j = i - 1;
-        while (j >= begin && *j > key) {
-            *(j + 1) = *j;
-            --j;
-        }
-        *(j + 1) = key;
-    }
-}
-
-void PmergeMe::mergeDeque(std::deque<int>::iterator begin, std::deque<int>::iterator mid, std::deque<int>::iterator end) {
-    std::deque<int> temp(begin, end);
-    std::deque<int>::iterator left = temp.begin();
-    std::deque<int>::iterator right = left + (mid - begin);
-    std::deque<int>::iterator target = begin;
-
-    while (left < right && right < temp.end()) {
-        if (*left <= *right) {
-            *target = *left;
-            ++left;
+    // Step 1: Group elements into pairs
+    std::deque<std::pair<int, int> > pairs;
+    for (size_t i = 0; i < arr.size() - 1; i += 2) {
+        if (arr[i] > arr[i + 1]) {
+            pairs.push_back(std::make_pair(arr[i + 1], arr[i]));
         } else {
-            *target = *right;
-            ++right;
+            pairs.push_back(std::make_pair(arr[i], arr[i + 1]));
         }
-        ++target;
     }
 
-    while (left < right) {
-        *target = *left;
-        ++left;
-        ++target;
+    // Handle odd-length input
+    int extraElement = -1;
+    if (arr.size() % 2 != 0) {
+        extraElement = arr.back();
     }
 
-    while (right < temp.end()) {
-        *target = *right;
-        ++right;
-        ++target;
+    // Step 2 & 3: Sort the pairs based on their larger elements
+    sortPairsDeq(pairs);
+
+    // Step 4: Create the sorted sequence S with the larger elements
+    std::deque<int> sorted;
+    for (size_t i = 0; i < pairs.size(); ++i) {
+        sorted.push_back(pairs[i].second);
+    }
+
+    // Insert the element paired with the smallest element of S
+    sorted.insert(sorted.begin(), pairs[0].first);
+
+    // Step 5: Insert remaining elements
+    insertRemainingDeq(sorted, pairs);
+
+    // Handle odd-length input
+    if (extraElement != -1) {
+        binaryInsertDeq(sorted, extraElement, 0, sorted.size() - 1);
+    }
+
+    // Copy sorted result back to input array
+    arr = sorted;
+}
+
+void PmergeMe::sortPairsDeq(std::deque<std::pair<int, int> >& pairs) {
+    if (pairs.size() <= 1) return;
+
+    size_t mid = pairs.size() / 2;
+    std::deque<std::pair<int, int> > left(pairs.begin(), pairs.begin() + mid);
+    std::deque<std::pair<int, int> > right(pairs.begin() + mid, pairs.end());
+
+    sortPairsDeq(left);
+    sortPairsDeq(right);
+
+    std::deque<std::pair<int, int> > merged;
+    std::merge(left.begin(), left.end(), right.begin(), right.end(), 
+               std::back_inserter(merged), ComparePairs());
+    pairs.swap(merged);
+}
+
+void PmergeMe::insertRemainingDeq(std::deque<int>& sorted, const std::deque<std::pair<int, int> >& pairs) {
+    std::deque<int> insertionSequence = generateInsertionSequenceDeq(pairs.size() - 1);
+    
+    for (size_t i = 0; i < insertionSequence.size(); ++i) {
+        int index = insertionSequence[i];
+        if (index < static_cast<int>(pairs.size())) {
+            binaryInsertDeq(sorted, pairs[index].first, 0, sorted.size() - 1);
+        }
     }
 }
 
-void PmergeMe::mergeInsertionSortDeque(std::deque<int>& container, std::deque<int>::iterator begin, std::deque<int>::iterator end) {
-    if (end - begin <= 1) return;
-
-    while (end - begin > 16) { // Use while-loop instead of recursion for large partitions
-        std::deque<int>::iterator mid = begin + (end - begin) / 2;
-
-        // Recursively sort the smaller partition, iteratively sort the larger partition
-        if (mid - begin > end - mid) {
-            // Sort the right half recursively
-            mergeInsertionSortDeque(container, mid, end);
-            // Iteratively sort the left half
-            end = mid;
+void PmergeMe::binaryInsertDeq(std::deque<int>& sorted, int value, int left, int right) {
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (sorted[mid] == value) {
+            sorted.insert(sorted.begin() + mid, value);
+            return;
+        } else if (sorted[mid] > value) {
+            right = mid - 1;
         } else {
-            // Sort the left half recursively
-            mergeInsertionSortDeque(container, begin, mid);
-            // Iteratively sort the right half
-            begin = mid;
+            left = mid + 1;
         }
     }
-
-    // For small partitions, use insertion sort
-    insertionSortDeque(begin, end);
+    sorted.insert(sorted.begin() + left, value);
 }
 
-unsigned int PmergeMe::jacobsthal(unsigned int n) {
-    if (n == 0) return 0;
-    if (n == 1) return 1;
-    return jacobsthal(n - 1) + 2 * jacobsthal(n - 2);
+std::deque<int> PmergeMe::generateInsertionSequenceDeq(int n) {
+    std::deque<int> sequence;
+    int power = 2;
+    int lastGroupStart = 1;
+
+    while (lastGroupStart <= n) {
+        for (int i = lastGroupStart; i < lastGroupStart + power / 2 && i <= n; ++i) {
+            sequence.push_back(i);
+        }
+        lastGroupStart += power / 2;
+        power *= 2;
+    }
+
+    return sequence;
 }
+
 
 double measureSortingTimeVector(std::vector<int>& container) {
     clock_t start = clock();
@@ -227,6 +246,7 @@ double measureSortingTimeVector(std::vector<int>& container) {
 
 double measureSortingTimeDeque(std::deque<int>& container) {
     clock_t start = clock();
+    (void) container;
     PmergeMe::sortDeque(container);
     clock_t end = clock();
     return static_cast<double>(end - start) / (CLOCKS_PER_SEC / 1000.0);
