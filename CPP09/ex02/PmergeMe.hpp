@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:12:19 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/08/19 18:12:21 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/09/19 11:28:21 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include <climits>
 #include <ctime>
 #include <iomanip>
+#include <algorithm>
 
 #define DEBUG 0
 
