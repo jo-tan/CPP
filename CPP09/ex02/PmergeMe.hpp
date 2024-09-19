@@ -23,6 +23,8 @@
 #include <ctime>
 #include <iomanip>
 
+#define DEBUG 0
+
 
 class PmergeMe {
 
@@ -51,4 +53,4 @@ class PmergeMe {
 double measureSortingTimeVector(std::vector<int>& container);
 double measureSortingTimeDeque(std::deque<int>& container);
 
-#endif // PMERGEME_HPP
+#endif

@@ -81,14 +81,47 @@ void PmergeMe::sortPairs(std::vector<std::pair<int, int> >& pairs) {
     std::vector<std::pair<int, int> > left(pairs.begin(), pairs.begin() + mid);
     std::vector<std::pair<int, int> > right(pairs.begin() + mid, pairs.end());
 
+    if (DEBUG){
+        std::cout << "\033[33mDividing\033[0m\nLeft: ";
+        for (std::vector<std::pair<int, int> >::iterator it = left.begin(); it != left.end(); ++it) {
+            std::cout << "(" << it->first << ", " << it->second << ") ";
+        }
+        std::cout << " | Right: ";
+        for (std::vector<std::pair<int, int> >::iterator it = right.begin(); it != right.end(); ++it) {
+            std::cout << "(" << it->first << ", " << it->second << ") ";
+        }
+        std::cout << std::endl;
+    }
+
     sortPairs(left);
     sortPairs(right);
 
+    if (DEBUG){
+        std::cout << "\033[33mMerging\033[0m\nLeft: ";
+        for (std::vector<std::pair<int, int> >::iterator it = left.begin(); it != left.end(); ++it) {
+            std::cout << "(" << it->first << ", " << it->second << ") ";
+        }
+        std::cout << " | Right: ";
+        for (std::vector<std::pair<int, int> >::iterator it = right.begin(); it != right.end(); ++it) {
+            std::cout << "(" << it->first << ", " << it->second << ") ";
+        }
+        std::cout << std::endl;
+
+    }
+    
     std::vector<std::pair<int, int> > merged;
     merged.reserve(pairs.size());
     std::merge(left.begin(), left.end(), right.begin(), right.end(), 
                std::back_inserter(merged), ComparePairs());
 
+    if (DEBUG){
+        std::cout << "\033[33mMerged\033[0m: ";
+        for (std::vector<std::pair<int, int> >::iterator it = merged.begin(); it != merged.end(); ++it) {
+            std::cout << "(" << it->first << ", " << it->second << ") ";
+        }
+        std::cout << std::endl;
+    }
+    
     pairs = merged;
 }
 
@@ -98,12 +131,26 @@ void PmergeMe::insertRemaining(std::vector<int>& sorted, const std::vector<std::
     for (size_t i = 0; i < insertionSequence.size(); ++i) {
         int index = insertionSequence[i];
         if (index < static_cast<int>(pairs.size())) {
+            if (DEBUG){
+                // Debug: Print the element being inserted
+                std::cout << "Inserting smaller element from pairs[" << index << "] = " << pairs[index].first << std::endl;
+            }
             binaryInsert(sorted, pairs[index].first, 0, sorted.size() - 1);
         }
     }
 }
 
 void PmergeMe::binaryInsert(std::vector<int>& sorted, int value, int left, int right) {
+
+    if (DEBUG){
+       // Debug: Print the sorted array before insertion
+        std::cout << "Before inserting " << value << ": ";
+        for (std::vector<int>::iterator it = sorted.begin(); it != sorted.end(); ++it) {
+            std::cout << *it << " ";
+        }
+        std::cout << std::endl; 
+    }
+    
     while (left <= right) {
         int mid = left + (right - left) / 2;
         if (sorted[mid] == value) {
@@ -116,6 +163,15 @@ void PmergeMe::binaryInsert(std::vector<int>& sorted, int value, int left, int r
         }
     }
     sorted.insert(sorted.begin() + left, value);
+
+    if (DEBUG){
+       // Debug: Print the sorted array after insertion
+        std::cout << "After inserting " << value << ": ";
+        for (std::vector<int>::iterator it = sorted.begin(); it != sorted.end(); ++it) {
+            std::cout << *it << " ";
+        }
+        std::cout << std::endl; 
+    }
 }
 
 std::vector<int> PmergeMe::generateInsertionSequence(int n) {
@@ -129,6 +185,15 @@ std::vector<int> PmergeMe::generateInsertionSequence(int n) {
         }
         lastGroupStart += power / 2;
         power *= 2;
+    }
+
+    if (DEBUG){
+        // Debug: Print the generated insertion sequence
+        std::cout << "Insertion Sequence: ";
+        for (std::vector<int>::iterator it = sequence.begin(); it != sequence.end(); ++it) {
+            std::cout << *it << " ";
+        }
+        std::cout << std::endl;
     }
 
     return sequence;
