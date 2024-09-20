@@ -24,7 +24,7 @@
 #include <iomanip>
 #include <algorithm>
 
-#define DEBUG 1
+#define DEBUG 0
 
 
 class PmergeMe {
@@ -34,6 +34,7 @@ class PmergeMe {
         ~PmergeMe();
         PmergeMe(const PmergeMe& src);
         PmergeMe& operator=(const PmergeMe& src);
+        static int jacobsthal(int n);
 
         static void sortPairs(std::vector<std::pair<int, int> >& pairs);
         static void insertRemaining(std::vector<int>& sorted, const std::vector<std::pair<int, int> >& pairs);

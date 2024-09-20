@@ -56,7 +56,7 @@ void PmergeMe::sortVector(std::vector<int>& arr) {
     // Insert the element paired with the smallest element of S
     sorted.insert(sorted.begin(), pairs[0].first);
 
-    // Step 5: Insert remaining elements
+    // Step 5: Insert remaining elements using Jacobsthal sequence
     insertRemaining(sorted, pairs);
 
     // Handle odd-length input
@@ -126,44 +126,40 @@ void PmergeMe::sortPairs(std::vector<std::pair<int, int> >& pairs) {
 }
 
 void PmergeMe::insertRemaining(std::vector<int>& sorted, const std::vector<std::pair<int, int> >& pairs) {
-    std::vector<int> insertionSequence = generateInsertionSequence(pairs.size() - 1);
-
-    std::vector<bool> inserted(pairs.size(), false);
+   std::vector<int> insertionSequence = generateInsertionSequence(pairs.size() - 1);
     
     for (size_t i = 0; i < insertionSequence.size(); ++i) {
         int index = insertionSequence[i];
         if (index < static_cast<int>(pairs.size())) {
-            if (DEBUG){
-                // Debug: Print the element being inserted
+            if (DEBUG) {
                 std::cout << "Inserting smaller element from pairs[" << index << "] = " << pairs[index].first << std::endl;
             }
             binaryInsert(sorted, pairs[index].first, 0, sorted.size() - 1);
-            inserted[index] = true;
-        }
-    }
-
-    for (size_t i = 0; i < pairs.size(); ++i){
-        if (!inserted[i]){
-            binaryInsert(sorted, pairs[i].first, 0, sorted.size() - 1);
-            inserted[i] = true;
         }
     }
 }
 
+int PmergeMe::jacobsthal(int n) {
+    if (n == 0) return 0;
+    if (n == 1) return 1;
+    
+    int a = 0, b = 1, c;
+    for (int i = 2; i <= n; ++i) {
+        c = b + 2 * a;
+        a = b;
+        b = c;
+    }
+    return b;
+}
+
 void PmergeMe::binaryInsert(std::vector<int>& sorted, int value, int left, int right) {
 
-    if (DEBUG){
-       // Debug: Print the sorted array before insertion
-        std::cout << "Before inserting " << value << ": ";
-        for (std::vector<int>::iterator it = sorted.begin(); it != sorted.end(); ++it) {
-            std::cout << *it << " ";
-        }
-        std::cout << std::endl; 
-    }
-    
-    while (left <= right) {
+   while (left <= right) {
         int mid = left + (right - left) / 2;
-        if (sorted[mid] > value) {
+        if (sorted[mid] == value) {
+            sorted.insert(sorted.begin() + mid, value);
+            return;
+        } else if (sorted[mid] > value) {
             right = mid - 1;
         } else {
             left = mid + 1;
@@ -171,43 +167,50 @@ void PmergeMe::binaryInsert(std::vector<int>& sorted, int value, int left, int r
     }
     sorted.insert(sorted.begin() + left, value);
 
-    if (DEBUG){
-       // Debug: Print the sorted array after insertion
+    if (DEBUG) {
         std::cout << "After inserting " << value << ": ";
         for (std::vector<int>::iterator it = sorted.begin(); it != sorted.end(); ++it) {
             std::cout << *it << " ";
         }
-        std::cout << std::endl; 
+        std::cout << std::endl;
     }
 }
 
 std::vector<int> PmergeMe::generateInsertionSequence(int n) {
-    std::vector<int> Jsequence;
-    int j0 = 1, j1 = 3;
-    if (n > 0) Jsequence.push_back(j0);
-    if (n > 1) Jsequence.push_back(j1);
-    int currSequenceIndex = 2;
-    
-    while (true){
-        int jNext = j1 + 2 * j0;
-        if (jNext > n)
-            break;
-        Jsequence.push_back(jNext);
-        j0 = j1;
-        j1 = jNext;
-        currSequenceIndex++;
+    std::vector<int> sequence;
+    sequence.push_back(1);  // Start with 1
+
+    int j = 3; // Start with the 3rd Jacobsthal number (3)
+    int prev = 1;
+    int curr = 3;
+
+    while (curr <= n) {
+        // Add elements in reverse order from curr down to (prev+1)
+        for (int i = curr; i > prev; --i) {
+            if (i <= n) sequence.push_back(i);
+        }
+        
+        // Move to the next Jacobsthal number
+        int next = jacobsthal(j + 1);
+        prev = curr;
+        curr = next;
+        ++j;
     }
 
-    if (DEBUG){
-        // Debug: Print the generated insertion sequence
+    // Add any remaining elements
+    for (int i = prev + 1; i <= n; ++i) {
+        sequence.push_back(i);
+    }
+
+    if (DEBUG) {
         std::cout << "Insertion Sequence: ";
-        for (std::vector<int>::iterator it = Jsequence.begin(); it != Jsequence.end(); ++it) {
+        for (std::vector<int>::iterator it = sequence.begin(); it != sequence.end(); ++it) {
             std::cout << *it << " ";
         }
         std::cout << std::endl;
     }
 
-    return Jsequence;
+    return sequence;
 }
 
 // Deque implementation
@@ -276,6 +279,9 @@ void PmergeMe::insertRemainingDeq(std::deque<int>& sorted, const std::deque<std:
     for (size_t i = 0; i < insertionSequence.size(); ++i) {
         int index = insertionSequence[i];
         if (index < static_cast<int>(pairs.size())) {
+            if (DEBUG) {
+                std::cout << "Inserting smaller element from pairs[" << index << "] = " << pairs[index].first << std::endl;
+            }
             binaryInsertDeq(sorted, pairs[index].first, 0, sorted.size() - 1);
         }
     }
@@ -298,17 +304,26 @@ void PmergeMe::binaryInsertDeq(std::deque<int>& sorted, int value, int left, int
 
 std::deque<int> PmergeMe::generateInsertionSequenceDeq(int n) {
     std::deque<int> sequence;
-    int power = 2;
-    int lastGroupStart = 1;
+    sequence.push_back(1);
 
-    while (lastGroupStart <= n) {
-        for (int i = lastGroupStart; i < lastGroupStart + power / 2 && i <= n; ++i) {
-            sequence.push_back(i);
+    int j = 3;
+    int prev = 1;
+    int curr = 3;
+
+    while (curr <= n) {
+        for (int i = curr; i > prev; --i) {
+            if (i <= n) sequence.push_back(i);
         }
-        lastGroupStart += power / 2;
-        power *= 2;
+        int next = jacobsthal(j + 1);
+        prev = curr;
+        curr = next;
+        ++j;
     }
 
+    //add remaining numbers
+    for (int i = prev + 1; i <= n; ++i) {
+        sequence.push_back(i);
+    }
     return sequence;
 }
 

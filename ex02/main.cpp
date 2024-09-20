@@ -74,7 +74,7 @@ int main(int argc, char* argv[]) {
             }
             std::cout << std::endl;
             std::cout << "\033[35mDEQ\033[0m: ";
-            for (size_t i = 0; i < vec.size(); ++i) {
+            for (size_t i = 0; i < deq.size(); ++i) {
                 std::cout << deq[i] << " ";
             }
             std::cout << std::endl;
