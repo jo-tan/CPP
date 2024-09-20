@@ -78,7 +78,9 @@
         "set": "cpp",
         "csignal": "cpp",
         "list": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "__tree": "cpp",
+        "queue": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
