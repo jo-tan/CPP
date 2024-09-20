@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:12:19 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/09/19 11:28:21 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/09/20 09:49:14 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ class PmergeMe {
         ~PmergeMe();
         PmergeMe(const PmergeMe& src);
         PmergeMe& operator=(const PmergeMe& src);
+        static int jacobsthal(int n);
 
         static void sortPairs(std::vector<std::pair<int, int> >& pairs);
         static void insertRemaining(std::vector<int>& sorted, const std::vector<std::pair<int, int> >& pairs);

@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:10:28 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/09/19 14:05:33 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/09/20 10:46:28 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void BitcoinExchange::validateNumber(const std::string &str) {
         if (decimalPoint != std::string::npos) {
             size_t decimalErr = str.find('.', decimalPoint + 1);
             if (decimalErr != std::string::npos)
-                throw InputError("too many decimal points" + str);
+                throw InputError("not a number => " + str);
         }
 
         // If there's a + or - sign check the next characters

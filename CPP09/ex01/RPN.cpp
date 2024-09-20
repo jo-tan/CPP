@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:11:36 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/08/19 18:11:37 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/09/20 13:31:21 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,10 @@ void RPN::SubOverflow(int a, int b){
 }
 
 void RPN::MulOverflow(int a, int b){
-    if (a != 0 && (b > std::numeric_limits<int>::max() / a || b < std::numeric_limits<int>::min() / a)){
+    if (a > 0 && (b > std::numeric_limits<int>::max() / a || b < std::numeric_limits<int>::min() / a)){
+        throw std::runtime_error("Integer overflow (Mul)");
+    }
+    else if (a < 0 && (b < std::numeric_limits<int>::max() / a || b > std::numeric_limits<int>::min() / a)){
         throw std::runtime_error("Integer overflow (Mul)");
     }
 }

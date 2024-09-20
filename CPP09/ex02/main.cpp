@@ -6,7 +6,7 @@
 /*   By: jo-tan <jo-tan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:12:00 by jo-tan            #+#    #+#             */
-/*   Updated: 2024/08/19 18:12:01 by jo-tan           ###   ########.fr       */
+/*   Updated: 2024/09/20 10:33:50 by jo-tan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ public:
 int validateAndConvert(const std::string& input) {
 
     if (input.empty()){
-        throw InputError("no data set");
+        throw InputError("find empty data");
     }
     std::istringstream iss(input);
     long long num;
