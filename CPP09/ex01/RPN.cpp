@@ -128,7 +128,9 @@ int RPN::doMath(){
             stack.push(result);
             // std::cout << "RESULT: " << result << std::endl;
         } else {
-            int number = std::atoi(token.c_str());
+            long int number = std::stol(token.c_str());
+            if (number > std::numeric_limits<int>::max() || number < std::numeric_limits<int>::min())
+                throw std::runtime_error("Integer Overflow: " + token);
             stack.push(number);
         }
     }
